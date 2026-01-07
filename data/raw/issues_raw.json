@@ -3,6 +3,7 @@
     "issue_id": 14807,
     "title": "HTTP server endpoint /libraries/demo fails (returns HTTP 500 with HTML), breaking demo library retrieval.",
     "body": "### JabRef version\n\nOther (please describe below)\n6.0-alpha.403\n\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nubuntu:22.04\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Start JabRef.\n2. Open File → Preferences → HTTP Server.\n3. Enable the HTTP server and apply/confirm with OK.\n4. Run the following command (adjust host/port to match the UI if needed):\n`curl -sS --max-time 5 -D - \"http://127.0.0.1:23119/libraries/demo\" -o /tmp/demo.json`\n\n5. (Optional) Check the file size:\n`wc -c /tmp/demo.json`\n\n### Expected Behavior\n\n- The endpoint returns HTTP 200 OK.\n- The response Content-Type is application/json.\n- /tmp/demo.json contains the demo JSON payload (baseline observed ~10,975 bytes).\n\n### Actual Behavior\n- The endpoint returns HTTP 500 Request failed.\n- The response Content-Type is text/html; charset=ISO-8859-1.\n- /tmp/demo.json is much smaller (observed ~1,031 bytes), indicating an error HTML payload instead of JSON.\n\n### Appendix\n\n- Reproducible after merging https://github.com/JabRef/jabref/pull/14489 , namely Commit: https://github.com/JabRef/jabref/commit/636b37c1522f3b4022f1f6275cbdba04d519ae11\n- After restarting JabRef, this issue still exists.\n\n### Screenshot before\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/9012a6b9-598c-4345-8cc9-fe792aa3ad86\" />\n\n### Screenshot after\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/e06201e7-d25b-437e-86dd-0fa202702db2\" />",
+    "commit_messages": [],
     "labels": [
       "📌 Pinned",
       "component: jabsrv"
@@ -12,6 +13,9 @@
     "issue_id": 14805,
     "title": "“SourceTab error” dialog immediately appears after clicking OK in \"Error Occurred\" dialog, blocking further interaction.",
     "body": "### JabRef version\n\nOther (please describe below)\n6.0-alpha.403\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nubuntu:22.04\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Launch JabRef.\n2. Create a new library and add an entry; open the entry editor.\n3. Open the Source tab and make the Bib(La)TeX invalid (e.g., delete the final closing brace }).\n4. Switch to another tab to trigger the error handling dialog.\n5. Click the dialog’s OK button to close it.\n\n### Expected Behavior\n\n- Clicking OK should close the modal dialog and return control to the entry editor so the user can continue editing or fixing the source.\n\n### Actual Behavior\n\n- The “SourceTab error” dialog is immediately shown after clicking OK.\n- The dialog continues to block the entry editor view, preventing interaction.\n\n### Screenshots\n\n#### after Step 4\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/f8edc2fd-9a85-453b-85e8-b1af41a4829f\" />\n\n#### after Step 5\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/6055f124-cfae-4794-b617-44f8fb084ca2\" />\n\n### Appendix\n\nReproducible after merging https://github.com/JabRef/jabref/pull/14504 , namely Commit: https://github.com/JabRef/jabref/commit/0b2baaa4d4d19530995cae2b455031e572d52d81",
+    "commit_messages": [
+      "Merge branch 'main' into fix/#14805"
+    ],
     "labels": [
       "component: entry-editor",
       "📍 Assigned",
@@ -22,6 +26,7 @@
     "issue_id": 14787,
     "title": "Minor grammar issues in privacy policy",
     "body": "The privacy policy contains a few minor grammatical issues that could be improved for clarity.\n",
+    "commit_messages": [],
     "labels": [
       "📌 Pinned"
     ]
@@ -30,24 +35,28 @@
     "issue_id": 14783,
     "title": "Embedded postgres does not work under linux arm 64",
     "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nUbuntu arm 24.04 lts\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Download latest version or also alpha 4 version or alpha 3 \n2. Navigate to /opt/jabref/bin\n3. Run ./JabRef\n\nSee illegal state exception about missing libraries \n```\nERROR: No postgres binaries found, you need to add an appropriate maven dependency that meets the following parameters - system: 'Linux', architecture: 'arm_64' [https://github.com/zonkyio/embedded-postgres#additional-architectures]\nException in thread \"main\" java.lang.IllegalStateException: Missing embedded postgres binaries\n\n```\nAlpha 3 is broken as well \n\nThis must be something with the multi project JabRef build stuff or whatever. Cannot really narrow it down.\nI can just rule out that it has something to do with the library itself. \n\n### Appendix\n\nOriginally reported i the forum https://discourse.jabref.org/t/version-6-0-jabref-6-0-arm64-deb-not-starting/9016/3\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
     "labels": []
   },
   {
     "issue_id": 14778,
     "title": "The API summary failed with error message saying Gemini-1.5-flash is not found",
     "body": "### JabRef version\n\n6.0-alpha.4\n\n### Operating system\n\nmacOS\n\n### Details on version and operating system\n\n_No response_\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. In `File-Preferences-AI`, set `AI provider` to `Gemini` with Chat model `gemini-1.5-flash`, and your `API key`, then save\n2. open a `Bibentry`, switch to `AI summary` tab\n3. the response message shows the following\n\n```text\n{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.\",\n    \"status\": \"NOT_FOUND\"\n  }\n}\n```\n\n<img width=\"1235\" height=\"563\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ee4d408a-647e-4a97-91af-30f286b6afbf\" />\n\n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
     "labels": []
   },
   {
     "issue_id": 14746,
     "title": "Fix Dockerbuild",
     "body": "The workflows to build the Docker images stopped working https://github.com/JabRef/jabref/actions/workflows/dockerimages.yml\n\n```\n182.5 A problem was found with the configuration of task ':jablib:generateJournalListMV' (type 'JBangTask').\n182.5   - In plugin 'com.github.koppor.jbang-gradle-plugin' type 'dev.jbang.gradle.tasks.JBangTask' property 'installDir' specifies directory '/root/.jbang/cache' which doesn't exist.\n```\n\nRefs https://github.com/jbangdev/jbang-gradle-plugin/pull/21\n\n---\n\n    docker buildx build --progress=plain -t jabkit -f Dockerfile.jabkit .",
+    "commit_messages": [],
     "labels": []
   },
   {
     "issue_id": 14739,
     "title": "Switch to release of jbang-gradle-plugin",
     "body": "Update to the release where https://github.com/jbangdev/jbang-gradle-plugin/pull/21 is included.\n\nAt https://github.com/JabRef/jabref/pull/14725, we use `\"com.github.koppor:jbang-gradle-plugin:jitpack-SNAPSHOT\")`, and we should switch back to the original tool.",
+    "commit_messages": [],
     "labels": [
       "status: depends-on-external"
     ]
@@ -56,12 +65,17 @@
     "issue_id": 14737,
     "title": "Output version at startup",
     "body": "Triggered by https://github.com/JabRef/jabref/pull/14732#issuecomment-3693997293\n\nWe do not know which JabRef version is running - should be output.\n\n```\n$ /opt/jabref/bin/JabRef\nWARNING: Using incubator modules: jdk.incubator.vector\nMessages are not initialized before accessing key: References\n2025-12-27 15:03:27 [main] org.jabref.Launcher.main()\nERROR: Could not launch JabRef: java.lang.IllegalStateException: Cannot instantiate view: interface org.jabref.logic.preferences.CliPreferences\n```",
+    "commit_messages": [],
     "labels": []
   },
   {
     "issue_id": 14730,
     "title": "Reword citation key patterns preferences text",
     "body": "In Preferences > Citation key patterns rename\n\n`for entries without a key` to `only for entries without a key`\n`Generate a new key for imported` ... to `Generate new keys for imported` ...",
+    "commit_messages": [
+      "Fix wording for citation key patterns preferences (#14730)",
+      "Fix wording for citation key patterns preferences (#14730) (#14733)\n\n* Fix wording for citation key patterns preferences (#14730)\n\n* reverted the changes in fxml file\n\n* Fixed : build failure\n\n* fixed : build failure"
+    ],
     "labels": [
       "good first issue",
       "📌 Pinned"
@@ -71,6 +85,7 @@
     "issue_id": 14729,
     "title": "JabRef doesn't start on Debian Sid",
     "body": "### JabRef version\n\n6.0-alpha.4\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nDebian Sid AMD64\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\nHere is the log:\n\n```\n$ /opt/jabref/bin/JabRef\nWARNING: Using incubator modules: jdk.incubator.vector\nMessages are not initialized before accessing key: References\n2025-12-27 09:55:09 [main] org.jabref.Launcher.main()\nERROR: Could not launch JabRef: java.lang.IllegalStateException: Cannot instantiate view: interface org.jabref.logic.preferences.CliPreferences\n\tat afterburner.fx/com.airhacks.afterburner.injection.Injector.lambda$getDefaultInstanceSupplier$6(Unknown Source)\n\tat afterburner.fx/com.airhacks.afterburner.injection.Injector.instantiateModelOrService(Unknown Source)\n\tat afterburner.fx/com.airhacks.afterburner.injection.Injector.instantiateModelOrService(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.MainTableColumnModel.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.MainTableColumnModel.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.ColumnPreferences.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.ColumnPreferences.getDefault(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getMainTableColumnPreferences(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.importPreferences(Unknown Source)\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getInstance(Unknown Source)\n\tat org.jabref/org.jabref.Launcher.main(Unknown Source)\nCaused by: java.lang.InstantiationException: org.jabref.logic.preferences.CliPreferences\n\tat java.base/java.lang.Class.newInstance(Unknown Source)\n\t... 13 more\nCaused by: java.lang.NoSuchMethodException: org.jabref.logic.preferences.CliPreferences.<init>()\n\tat java.base/java.lang.Class.getConstructor0(Unknown Source)\n\t... 14 more\nException in thread \"main\" java.lang.IllegalStateException: Cannot instantiate view: interface org.jabref.logic.preferences.CliPreferences\n\tat afterburner.fx/com.airhacks.afterburner.injection.Injector.lambda$getDefaultInstanceSupplier$6(Unknown Source)\n\tat afterburner.fx/com.airhacks.afterburner.injection.Injector.instantiateModelOrService(Unknown Source)\n\tat afterburner.fx/com.airhacks.afterburner.injection.Injector.instantiateModelOrService(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.MainTableColumnModel.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.MainTableColumnModel.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.ColumnPreferences.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.maintable.ColumnPreferences.getDefault(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getMainTableColumnPreferences(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.importPreferences(Unknown Source)\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.<init>(Unknown Source)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getInstance(Unknown Source)\n\tat org.jabref/org.jabref.Launcher.main(Unknown Source)\nCaused by: java.lang.InstantiationException: org.jabref.logic.preferences.CliPreferences\n\tat java.base/java.lang.Class.newInstance(Unknown Source)\n\t... 13 more\nCaused by: java.lang.NoSuchMethodException: org.jabref.logic.preferences.CliPreferences.<init>()\n\tat java.base/java.lang.Class.getConstructor0(Unknown Source)\n\t... 14 more\n```\n\n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
     "labels": [
       "component: preferences"
     ]
@@ -79,6 +94,7 @@
     "issue_id": 14712,
     "title": "Update heylogs call",
     "body": "https://github.com/nbbrd/heylogs/issues/470#issuecomment-3510050145\n\nYou will learn about the CI pipeline ",
+    "commit_messages": [],
     "labels": [
       "good second issue",
       "dev: ci-cd"
@@ -88,6 +104,7 @@
     "issue_id": 14697,
     "title": "All the associated files should be displayed for broken linked files instead of only the first one",
     "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\n#13326 implemented #13264. However, only the first file associated with the broken linked files is displayed, which is not ideal.\n\nFor example, say we have the following file structure setup:\n\n```text\n./issue-9798\n├── issue-9798.bib\n├── subdir\n│   └── minimal.pdf\n└── subdir copy\n    └── minimal.pdf\n```\n\nThe current implementation only displayes the one under `subdir copy`.\n\n<img width=\"1114\" height=\"260\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b8825be1-d330-42a7-a17c-58a22b45066d\" />\n\n**Describe the solution you'd like**\n\nAn ideal implementation should display the two files under both `subdir` and `subdir copy`.\n\n\n",
+    "commit_messages": [],
     "labels": [
       "📍 Assigned",
       "📌 Pinned"

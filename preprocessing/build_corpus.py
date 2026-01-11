@@ -25,6 +25,42 @@ OUTPUT_FILE = os.path.join(BASE_DIR, "data", "processed", "corpus.csv")
 # ============================================
 MIN_LABEL_FREQ = 5  # recomendado para ~100 issues (multilabel)
 
+def map_labels_to_groups(labels):
+    """
+    Agrupa labels de GitHub a categorías más útiles para backlog grooming.
+    labels: lista de strings (labels originales)
+    return: lista de categorías (strings)
+    """
+    labels_set = set(labels)
+    groups = set()
+
+    # PRIORIDAD / URGENCIA
+    if "📌 Pinned" in labels_set or "📍 Assigned" in labels_set:
+        groups.add("PRIORITY")
+
+    # ONBOARDING / TAREAS PARA NUEVOS
+    if any(l.startswith("good ") for l in labels_set):
+        # más estricto si quieres:
+        # if any(l in labels_set for l in ["good first issue","good second issue","good third issue"]):
+        groups.add("NEWCOMER")
+
+    # AGRUPACIÓN POR COMPONENTES
+    if any(l.startswith("component:") for l in labels_set):
+        groups.add("COMPONENT")
+
+    # AGRUPACIÓN DE TAREAS DE DEV / MANTENIMIENTO
+    if any(l.startswith("dev:") for l in labels_set):
+        groups.add("DEVELOPMENT")
+
+    # TAMAÑO
+    #if any(l.startswith("size:") for l in labels_set):
+    #    groups.add("SIZE")
+
+    # ESTADO / BLOQUEOS
+    #if any(l.startswith("status:") for l in labels_set):
+    #    groups.add("STATUS")
+
+    return sorted(groups)
 
 def clean_text(text):
     """
@@ -122,13 +158,16 @@ def build_corpus():
             issues_without_labels += 1
         
         total_labels += len(labels)
-        
-        # Guardamos labels como lista (todavía), para poder filtrar luego
+
+        raw_labels = [str(label) for label in labels if label]
+        grouped_labels = map_labels_to_groups(raw_labels)
+
         processed_issues.append({
             "issue_id": issue.get("issue_id", idx),
             "text": cleaned_text,
-            "labels_list": [str(label) for label in labels if label]  # lista de strings
+            "labels_list": grouped_labels
         })
+
         
         # Mostrar progreso cada 10 issues
         if idx % 10 == 0:

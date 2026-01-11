@@ -12,7 +12,7 @@ import time
 
 OWNER = "jabref"
 REPO = "jabref"
-MAX_ISSUES = 100  # GitHub permite máx. 100 por request sin paginación cursor
+MAX_ISSUES = 300  # GitHub permite máx. 100 por request sin paginación cursor
 
 # 👉 RECOMENDADO: usar token por variable de entorno
 # En PowerShell (una sola vez):

@@ -1,5 +1,27 @@
 [
   {
+    "issue_id": 14822,
+    "title": "Spanish walkthrough tooltip not localized: shows English text “Click on ‘Preferences’” while UI is Spanish (“Preferencias”)",
+    "body": "### JabRef version\n\nOther (please describe below)\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nubuntu:22.04\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Set the application language to Spanish (Español) and restart\n2. Start the entry table configuration walkthrough (“Personalizar tabla de entrada”)\n3. Proceed until the walkthrough step that prompts opening Preferences, with the Archivo / File menu open\n\n### Expected Behavior\n- Walkthrough tooltip/instruction text is fully localized to Spanish\n- The referenced UI label in the tooltip matches the Spanish menu item name (“Preferencias”)\n\n### Actual Behavior\n- Walkthrough tooltip shows English text: Click on \"Preferences\" while the menu item is Preferencias, creating a language mismatch and potential confusion.\n\n### Screenshots before\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5915f03d-38ed-4b89-ac5c-a28788e008d7\" />\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/db0ac551-c4cd-4cd6-ac79-76d5bddbc4b6\" />\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8bfe98c7-2479-4b56-90c7-ef0b2e0ebd9d\" />\n\n### Screenshots after\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/f0c7df02-d639-4f67-8d53-64903dbbbfb4\" />\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d1c5816d-a6cd-476b-a084-243eeb8172b1\" />\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/e86b9ef7-f4d4-4dcd-9db6-d9f19904e11f\" />\n\n### Appendix\n\n### Notes\n\nRefer to https://github.com/JabRef/jabref/pull/14460 , namely Commit: https://github.com/JabRef/jabref/commit/aa7691f3372356349112a8b7cbb5094a7f0a5935",
+    "commit_messages": [],
+    "labels": [
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14818,
+    "title": "default opening of the search panel upon new launch",
+    "body": "JabRef 6.0-alpha.55--2026-01-04--8a35398\nLinux 6.14.0-37-generic amd64 \nJava 24.0.2 \nJavaFX 25.0.1+3\n\nWith the latest alpha, the Web search and Search panels open at the left of the screen on every launch of the program.  \n\n<img width=\"927\" height=\"691\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/467074db-112e-485d-adac-fb63c080b4b3\" />\n\n\n\nThis is new behaviour and not desired (by me).  I'd like to be able to control whether this happens or not, or else to have JR remember my display settings from one session to another. \n\nThanks!\nDominik",
+    "commit_messages": [
+      "Fix Web Search panel opening on every startup\n\nCloses #14818\n\nRemoved WEB_SEARCH from default visible side panes. Now only GROUPS\npanel is shown by default on first startup. User preferences for\nside pane visibility are properly restored from previous sessions."
+    ],
+    "labels": [
+      "component: ui",
+      "component: preferences",
+      "good first issue"
+    ]
+  },
+  {
     "issue_id": 14807,
     "title": "HTTP server endpoint /libraries/demo fails (returns HTTP 500 with HTML), breaking demo library retrieval.",
     "body": "### JabRef version\n\nOther (please describe below)\n6.0-alpha.403\n\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nubuntu:22.04\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Start JabRef.\n2. Open File → Preferences → HTTP Server.\n3. Enable the HTTP server and apply/confirm with OK.\n4. Run the following command (adjust host/port to match the UI if needed):\n`curl -sS --max-time 5 -D - \"http://127.0.0.1:23119/libraries/demo\" -o /tmp/demo.json`\n\n5. (Optional) Check the file size:\n`wc -c /tmp/demo.json`\n\n### Expected Behavior\n\n- The endpoint returns HTTP 200 OK.\n- The response Content-Type is application/json.\n- /tmp/demo.json contains the demo JSON payload (baseline observed ~10,975 bytes).\n\n### Actual Behavior\n- The endpoint returns HTTP 500 Request failed.\n- The response Content-Type is text/html; charset=ISO-8859-1.\n- /tmp/demo.json is much smaller (observed ~1,031 bytes), indicating an error HTML payload instead of JSON.\n\n### Appendix\n\n- Reproducible after merging https://github.com/JabRef/jabref/pull/14489 , namely Commit: https://github.com/JabRef/jabref/commit/636b37c1522f3b4022f1f6275cbdba04d519ae11\n- After restarting JabRef, this issue still exists.\n\n### Screenshot before\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/9012a6b9-598c-4345-8cc9-fe792aa3ad86\" />\n\n### Screenshot after\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/e06201e7-d25b-437e-86dd-0fa202702db2\" />",
@@ -108,6 +130,1027 @@
     "labels": [
       "📍 Assigned",
       "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14660,
+    "title": "Typing in identifier field should change type",
+    "body": "1. Copy `https://arxiv.org/html/2503.08641v1#bib.bib5` to the clipboard\n2. Go to JabRef and select \"New Entry...\"\n3. See that identifier is not known\\\n    <img width=\"1452\" height=\"543\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/7f41411d-4ebd-45f4-9bc1-1aae5604a7b0\" />\n\nNow adapt the field content to `2503.08641v1`.\n\nExpectation: \"arXiv\" is selected.\n\nActual: Nothing happens.\n\n",
+    "commit_messages": [
+      "Fix: Auto-detect identifier type when typing in identifier field\n\n- Add ChangeListener to idText field to detect identifier type on input\n- Automatically update idFetcher ComboBox when valid identifier is detected\n- Only updates when 'Automatically determine identifier type' is selected\n- Also detects identifier type when switching to auto-detect mode\n- Handles arXiv, DOI, ISBN, RFC, and SSRN identifier types\n- Validates DOI and ISBN identifiers before updating fetcher\n\nFixes #14660",
+      "Fix: Auto-detect identifier type when typing in identifier field (#14662)\n\n* Fix: Auto-detect identifier type when typing in identifier field\n\n- Add ChangeListener to idText field to detect identifier type on input\n- Automatically update idFetcher ComboBox when valid identifier is detected\n- Only updates when 'Automatically determine identifier type' is selected\n- Also detects identifier type when switching to auto-detect mode\n- Handles arXiv, DOI, ISBN, RFC, and SSRN identifier types\n- Validates DOI and ISBN identifiers before updating fetcher\n\nFixes #14660\n\n* Refactor: Extract identifier validation to avoid code duplication\n\n- Extract identifier validation logic into isValidIdentifier() method\n- Use the extracted method in both listeners and extractValidIdentifierFromClipboard()\n- Reduces code duplication as requested in review\n\nAddresses review feedback on PR #14662\n\n* Format code according to JabRef style guidelines\n\n* Revert formatting commit - only format changed code, not entire file\n\nThe previous formatting commit reformatted the entire file including unrelated code.\nThis reverts those changes. Only the new code we added should be formatted if needed.\n\n* Fix: Remove unnecessary null checks and unused parameters\n\n- Remove unnecessary null checks (idText.getText() and newValue)\n- Replace unused 'observable' parameter with '_'\n- Format code according to project guidelines\n- Add changelog entry\n\nAddresses review feedback on PR #14662\n\n* Fix syntax error in fetcherForIdentifier method\n\n* Format isValidIdentifier switch statement to match project style\n\n* Fix: Handle URL fragments and query parameters in identifier detection\n\nFixes issue where URLs with fragments (e.g., https://arxiv.org/html/2503.08641v1#bib.bib5)\nwere not being detected. The cleanIdentifierText() method now strips fragments\nand query parameters before identifier parsing.\n\n* Fix CHANGELOG entry format to match origin/main style\n\n* Fix CHANGELOG entry placement and format to match Unreleased section style\n\n* Refactor: Remove cleanIdentifierText and extract duplicate logic\n\n- Removed cleanIdentifierText() method as Identifier.from() already handles parsing\n- Extracted duplicate identifier detection logic into updateFetcherFromIdentifierText() helper method\n- Updated both listeners to use the shared helper method\n- Updated extractValidIdentifierFromClipboard() to use Identifier.from() directly\n\nAddresses reviewer feedback on code duplication and approach.\n\n* Refine JavaDoc\n\n* Fix DOI validation and removes obsolete code\n\n* Fix CHANGELOG.md\n\n* More Optional syntax\n\n* WIP\n\n* Fix: Remove incomplete switch statement causing compilation error\n\nThe reviewer's refactoring left an incomplete switch statement that caused\na compilation error. Removed the broken code to restore compilation.\n\n* Fix: Correct JavaDoc tag from @returns to @return\n\nThe JavaDoc parser doesn't recognize @returns. Changed to @return\nand converted to proper JavaDoc comment format.\n\n---------\n\nCo-authored-by: atulrcrosslake <atulr@crosslaketech.com>\nCo-authored-by: Oliver Kopp <kopp.dev@gmail.com>"
+    ],
+    "labels": [
+      "component: ui",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14659,
+    "title": "Addd `findInText` for ArXivIdentifier",
+    "body": "1. Copy `https://arxiv.org/html/2503.08641v1#bib.bib5` to the clipboard\n2. Go to JabRef and select \"New Entry...\"\n3. See that identifier is not known\\\n    <img width=\"1452\" height=\"543\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/7f41411d-4ebd-45f4-9bc1-1aae5604a7b0\" />\n\nExpected: `arXiv` is selected as identifier type.\n\n- [ ] When a DOI is pasted, `DOI.findInText` is used. This method should also be implemented to `ArXivIdentifier.java`.\n- [ ] Adapt org.jabref.model.entry.identifier.Identifier#from\n- [ ] Also include tests.",
+    "commit_messages": [
+      "Add findInText method for ArXivIdentifier Fixes #14659 - Added findInText static method to ArXivIdentifier class - Supports both new-style (YYMM.NNNNN) and old-style (hep-th/9901001) identifiers - Added comprehensive tests for the new method"
+    ],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14657,
+    "title": "Add \"Import...\" to Welcome Tab",
+    "body": "The Welcome Tab currently does not include \"Import\"\n\n<img width=\"1099\" height=\"494\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/a62ad9a8-ce05-41a3-a608-c28dcf3b9b17\" />\n\nTask\n\n- [ ] Add \"Import into new library...\" to Welcome Tab. Same functionality as File > Import > Import into new library\n- [ ] Rename \"Import into new library\" to \"Import into new library...\" in File menu\n- [ ] Rename \"Import into current library\" to \"Import into current library...\" in File menu\n- [ ] Add three dots to \"Export*\" in File menu.\n\nLocalization hint: https://devdocs.jabref.org/code-howtos/localization.html",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "component: welcome-tab"
+    ]
+  },
+  {
+    "issue_id": 14654,
+    "title": "Restart-required dialog message is mixed Chinese/English after switching to zh_CN",
+    "body": "### JabRef version\n\nOther (please describe below)\n\nReproducible after merging https://github.com/JabRef/jabref/pull/14537 , namely Commit: 6d404973bb56397887e8dc4f22a7178c41766724\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nubuntu:22.04\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n#### Steps to reproduce\n\nLaunch JabRef\n\nOpen File → Preferences\n\nChange language to 中文（简体） (zh_CN) and save/apply\n\nObserve the restart-required confirmation dialog\n\n#### Expected behavior\n\nThe confirmation text is fully localized in Simplified Chinese (including the language name, e.g., “中文（简体）”), with natural Chinese wording and punctuation.\n\n#### Actual behavior\n\nThe first line reads in Chinese but embeds the English language name “Chinese (Simplified)” (mixed-language sentence), suggesting incomplete localization.\n\n#### Notes\nThis is introduced by https://github.com/JabRef/jabref/pull/14537 , or more precisely, the localization was not fully implemented by https://github.com/JabRef/jabref/pull/14537.\n\n### Appendix\n\n#### Screenshot before\n\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/1d401411-5a88-4bb0-b3c6-406e417adf02\" />\n\n#### Screenshot after\n<img width=\"1280\" height=\"800\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/60dd9378-53aa-418b-bf25-9113f6607709\" />\n",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14646,
+    "title": "Add step-by-step-guide to add multiple PDF to Chocolate.bib",
+    "body": "NOTE: This issue is to guide newcomers to the use of JabRef - and the artifacts researchers deal with (web pages, PDF files, BibTeX data).\n\nJabRef has a demonstration library at https://github.com/JabRef/jabref-demonstration-libraries/tree/main/chocolate. It just has a single PDF attached (due to copyright reasons).\n\nFor some issues, more PDFs are needed. Contributors do not know how to work with JabRef.\n\nAction point:\n\nCreate a step-by-step instruction with screenshots how to attach two more PDFs.\n\nPages from https://docs.jabref.org/ might be linked.\n\nCreate a pull request for https://github.com/JabRef/jabref-demonstration-libraries/tree/main/chocolate. This issue is opened here to gain visibility.",
+    "commit_messages": [],
+    "labels": [
+      "good first issue"
+    ]
+  },
+  {
+    "issue_id": 14645,
+    "title": "Change log levels for AI export",
+    "body": "Follow-up to https://github.com/JabRef/jabref/pull/14486\n\nWhen chatting with a group of papers and then an export, I got following log entries:\n\n```\nINFO: Sending message to AI provider (https://api.openai.com/v1) for answering in Group Inbox: What are the key findings?\n2025-12-17 23:40:46 [pool-2-thread-5] org.jabref.logic.ai.chatting.FollowUpQuestionGenerator.generateFollowUpQuestions()\nINFO: Generated 1 follow-up questions\n2025-12-17 23:41:01 [JavaFX Application Thread] org.jabref.gui.JabRefDialogService.notify()\nINFO: Export operation finished successfully.\n```\n\nThese are all `debug`, not `info`. Please change the logger calls accordingly.\n\nSee https://devdocs.jabref.org/code-howtos/logging.html for more information on logging.\n\n",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14643,
+    "title": "\"ArXiv\" should cased \"arXiv\" in New Entry dialog",
+    "body": "1. Copy https://arxiv.org/abs/2506.11002 into the clipboard\n2. Click on \"Add entry using...\"\\\n    <img width=\"948\" height=\"148\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/e4a08567-b68f-491f-9837-99d2aa0b1f88\" />\n3. See dialog\\\n    <img width=\"597\" height=\"366\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/02d06d88-9857-475c-8d12-b8d1f8928bc2\" />\n\n\"ArXiv\" should be cased \"arXiv\"\n\nSee https://devdocs.jabref.org/code-howtos/localization.html for localization hints.",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14642,
+    "title": "Rename \"Waiting ...\" to \"Summarizing ...\"",
+    "body": "1. Open a library\n2. Enable AI - https://docs.jabref.org/ai\n3. Attach a PDF\n4. Click on \"AI Summary\"\n5. See on the top right corner of JabRef the background task icon\n6. Click on it\n7. See something similar to\\\n    <img width=\"531\" height=\"161\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b28878b0-c599-4763-acb3-322bc6f7691f\" />\n\nThe text \"Waiting summary for ...\" should be changed to \"Summarizing ...\"\n\nDevelopment hint: https://devdocs.jabref.org/code-howtos/localization.html",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14640,
+    "title": "Disable Export button if no AI Chat is there",
+    "body": "Follow-up to https://github.com/JabRef/jabref/pull/14486\n\n1. Enable AI in JabRef - https://docs.jabref.org/ai/preferences\n2. Open a library with a PDF attached - e.g., https://github.com/JabRef/jabref-demonstration-libraries/tree/main/chocolate\n3. Select the PDF\n4. Go to tab \"AI Chat\"\n5. See that \"Export\" is enabled\\\n    <img width=\"1707\" height=\"590\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/bd40c75e-5804-45af-a744-d9e22d7f9b48\" />\n6. Expected: The button should only be enabled if there is some chat message\n\nThis issue requires a diving into JavaFX bindings.\n\n---\n\nAlso implement if for \"Chat with groups\"\n\n<img width=\"815\" height=\"647\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/9b3cc4f2-17d1-49a8-a9a4-9841ebf9a6c7\" />",
+    "commit_messages": [
+      "Fix: Disable AI Export button when chat history is empty (#14667)\n\n* Disable AI export button when chat history is empty\n\n* Update CHANGELOG.md for #14640\n\n* Build Fix: Remove obsolete localization key and fix CSL prolog #14640\n\n* Add asserts\n\n---------\n\nCo-authored-by: Carl Christian Snethlage <calixtus@users.noreply.github.com>\nCo-authored-by: Carl Christian Snethlage <50491877+calixtus@users.noreply.github.com>"
+    ],
+    "labels": [
+      "good first issue",
+      "📍 Assigned"
+    ]
+  },
+  {
+    "issue_id": 14639,
+    "title": "Fix entries variable assignment",
+    "body": "Follow-up to https://github.com/JabRef/jabref/pull/14486\n\nIn https://github.com/CXZHANG0508/jabref/blob/93560b71ec74684e831e8ccca15fb8dd95112de7/jabgui/src/main/java/org/jabref/gui/ai/components/aichat/AiChatComponent.java#L110. `this.entries` is NOT `entries` any more.\n\n1. Change back to `this.entries = entries`\n2. Check if AI chat export still works.\n\nIf yes: file a PR changing back\n\nIf not: Report, what breaks.\n\n---\n\nReview comment: https://github.com/JabRef/jabref/pull/14486#discussion_r2628273786",
+    "commit_messages": [],
+    "labels": [
+      "good first issue"
+    ]
+  },
+  {
+    "issue_id": 14636,
+    "title": "runtime/bin/JabRef.bat not existient in 6.0.x",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nWindows\n\n### Details on version and operating system\n\nWindows 11\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Use firefox plugin\n2. plugin says that runtime/bat/JabRef.bat does not exist\n\nI think that this line here:\nhttps://github.com/JabRef/jabref/blob/39e7666dc31526f18de1f136be5ce4c570a19f99/jabgui/buildres/windows/JabRefHost.ps1#L14\nmay need to be changed to\n```\n$jabRefExe = [System.IO.Path]::Combine($PSScriptRoot, \"JabRef.exe\")\n```\n\nBecause if I change it, it works *...\nOr is this also something that got messed up on my system?\n\n\\* ... I mean the browser extension says that it connected to jabref successfully, however for some reason a paper is not send to jabref... Looks like that something else is also broken in my system :/\n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
+    "labels": [
+      "platform: windows",
+      "component: browser-plugin"
+    ]
+  },
+  {
+    "issue_id": 14594,
+    "title": "Cleanup of `eprint`",
+    "body": "`arXiv:1503.05173` in EPRINT field should be split-up.\n\nTest\n\n```java\n                Arguments.of(\n                        new BibEntry()\n                                .withField(StandardField.EPRINT, \"arXiv:1503.05173\"),\n                        new BibEntry()\n                                .withField(StandardField.EPRINT, \"1503.05173\")\n                                .withField(StandardField.EPRINTTYPE, \"arxiv\")\n                ),\n```\n\nTask:\n\n1. Add test to `org.jabref.logic.cleanup.EprintCleanupTest#cleanupTransformsEntries()`\n2. Adapt `org.jabref.logic.cleanup.EprintCleanup#cleanup` accordingly.",
+    "commit_messages": [
+      "Fix Issue #14594: Split arXiv prefix from EPRINT field"
+    ],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14564,
+    "title": "Web Search Preferences: Search Engine URL Templates table grows too large and leaves empty space",
+    "body": "### JabRef version\n\n5.15 (latest release)\n\n### Operating system\n\nWindows\n\n### Details on version and operating system\n\nWindows 11\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Open JabRef.\n2. Go to File → Preferences → Web search.\n3. Scroll to the “Search Engine URL Templates” table.\n4. Observe that the table expands vertically, leaving a large empty blank area under the few existing rows.\n\n\n### Appendix\n\n### Before (buggy layout)\n<img width=\"1043\" height=\"813\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d13c89cc-936b-4d1d-b22a-7666b96e8402\" />\n\n### After (fixed layout)\n<img width=\"1643\" height=\"985\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/4d7b84a0-3e6b-4142-9caf-ca438f950dea\" />\n\nThe “Search Engine URL Templates” table becomes unnecessarily tall and leaves an empty blank area. \nExpected: The table should size based on row count and remain compact.\n",
+    "commit_messages": [],
+    "labels": []
+  },
+  {
+    "issue_id": 14562,
+    "title": "Refactor PagesChecker: Extract duplicate regex constants",
+    "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\nThe regex pattern fragment [A-Za-z]?\\d* is repeated 4 times across the constants PAGES_EXP_BIBTEX and PAGES_EXP_BIBLATEX. This makes it slightly harder to maintain if the page format definition needs to change.\n\n**Describe the solution you'd like**\nI propose extracting the repeated pattern into a meaningful named constant to improve maintainability.\n\n1. Define a constant for the page number pattern. Based on the Glitter feedback, I will use a name like PAGE_NUMBER_PATTERN.\n2. Reconstruct the export patterns using this constant.\n\n**Additional context**\nThis refactoring was approved by @calixtus (Carl Christian Snethlage) in Glitter.\n",
+    "commit_messages": [
+      "Refactor PagesChecker: Extract duplicate regex constants\n\nFixes #14562",
+      "Refactor PagesChecker: Extract duplicate regex constants\n\nFixes #14562",
+      "Refactor PagesChecker: Extract duplicate regex constants (#14567)\n\n* Refactor PagesChecker: Extract duplicate regex constants\n\nFixes #14562\n\n* fix comments dont align on indentation\n\n* Restore regex comments\n\n* Revert \"Merge branch 'refactor-pages-clean' of https://github.com/Zeglow/jabref into clean-fix\"\n\nThis reverts commit 788979cac0192769167f0f3a6ad2f9d8112637de, reversing\nchanges made to a4a023666946e3f9f7416a55f11f3bed58b98f81.\n\n* Revert \"Restore regex comments\"\n\nThis reverts commit a4a023666946e3f9f7416a55f11f3bed58b98f81.\n\n* restore MainTablePreferences.java, JabRefGuiPreferences.java and PagesChecker.java\n\n* fix comment formatting issue",
+      "Refactor PagesChecker: Extract duplicate regex constants (#14567)\n\n* Refactor PagesChecker: Extract duplicate regex constants\n\nFixes #14562\n\n* fix comments dont align on indentation\n\n* Restore regex comments\n\n* Revert \"Merge branch 'refactor-pages-clean' of https://github.com/Zeglow/jabref into clean-fix\"\n\nThis reverts commit 788979cac0192769167f0f3a6ad2f9d8112637de, reversing\nchanges made to a4a023666946e3f9f7416a55f11f3bed58b98f81.\n\n* Revert \"Restore regex comments\"\n\nThis reverts commit a4a023666946e3f9f7416a55f11f3bed58b98f81.\n\n* restore MainTablePreferences.java, JabRefGuiPreferences.java and PagesChecker.java\n\n* fix comment formatting issue",
+      "Refactor PagesChecker: Extract duplicate regex constants (#14567)\n\n* Refactor PagesChecker: Extract duplicate regex constants\n\nFixes #14562\n\n* fix comments dont align on indentation\n\n* Restore regex comments\n\n* Revert \"Merge branch 'refactor-pages-clean' of https://github.com/Zeglow/jabref into clean-fix\"\n\nThis reverts commit 788979cac0192769167f0f3a6ad2f9d8112637de, reversing\nchanges made to a4a023666946e3f9f7416a55f11f3bed58b98f81.\n\n* Revert \"Restore regex comments\"\n\nThis reverts commit a4a023666946e3f9f7416a55f11f3bed58b98f81.\n\n* restore MainTablePreferences.java, JabRefGuiPreferences.java and PagesChecker.java\n\n* fix comment formatting issue"
+    ],
+    "labels": [
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14557,
+    "title": "Rename labels",
+    "body": "- Rename \"Search pre-configured\" to \"Search pre-selected\"\n- Rename \"Web search fetchers\" to \"Pre-selected fetchers\" (File -> Preferences -> Web Search)\n\n<img width=\"1114\" height=\"939\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/44f7a3bf-7ecc-495f-a3cc-e66b08d0f48b\" />\n",
+    "commit_messages": [
+      "Resolution https://github.com/JabRef/jabref/issues/14557"
+    ],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14555,
+    "title": "Add eprinttype field to General Entry editor tab",
+    "body": "Currently JabRef shows eprint in one tab and eprinttype in another\n\n<img width=\"1220\" height=\"312\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/2a27ae7e-cca5-4b18-81b3-6f2328c96d8d\" />\n\n<img width=\"1220\" height=\"312\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/83f4eedc-849d-4f74-9b70-ea45d394ef94\" />\n\nReason: `eprint` is configured as \"General\" field:\n\n<img width=\"1117\" height=\"765\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c01f346e-e47b-41c2-a4ba-7ef544b78375\" />\n\n\nTask:\n\n1. Change default preference to contain `eprinttype` for `General:`\n2. Add preference migration if old preference is \n\n   ```\n   General:doi;citationcount;crossref;keywords;eprint;url;file;groups;owner;timestamp;printed;priority;qualityassured;ranking;readstatus;relevance\n   Abstract:abstract\n   ```",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14547,
+    "title": "Combine SearchableComboBox and TextField for adding fields in Custom Entry Types",
+    "body": "I previously worked on an issue, which has been resolved and merged (#14189). \n\nDuring the implementation of that fix, I realized that the current user interface for adding fields could be optimized. \nCurrently, the distinction or separation between selecting a standard field (via a SearchableComboBox) and entering a custom field name (via a free text field) can be removed.\n\nI have recently revisited this topic and found a way to combine these two inputs into a single control. The solution replaces the separate boxes with a unified TextField that supports auto-completion. This allows users to:\n- Select a standard field from the suggestion list\n- Type a custom field name freely if it doesn't exist in the list\n\nI have already successfully implemented this solution locally and would appreciate feedback on whether this modification is considered interesting for the project.\n\nAdditional context: This is a follow-up to the work done in #14082.",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14529,
+    "title": "Disorganized dependencies",
+    "body": "I noticed that the dependencies in the build.gradle.kts are not grouped by their destination or purpose. ",
+    "commit_messages": [],
+    "labels": []
+  },
+  {
+    "issue_id": 14516,
+    "title": "Update tests for the BibEntryCitationsAndReferencesRepositoryShell class",
+    "body": "This issue aims to increase the test coverage for the BibEntryCitationsAndReferencesRepositoryShell unit tests\n\nThe work includes:\n\n- **Improve Coverage:** Add tests for the isCitationsUpdatable, isReferencesUpdatable, and close methods to verify correct delegation to the underlying DAOs.\n- **Logical Fix:** Correct the incorrect delegation in the references read/write test (which was mistakenly calling citation methods). Seem in the image bellow\n\n<img width=\"754\" height=\"183\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/3c04b93d-79bc-4b16-a3ad-5b308661024c\" />",
+    "commit_messages": [],
+    "labels": [
+      "📍 Assigned"
+    ]
+  },
+  {
+    "issue_id": 14513,
+    "title": "Shift+Tab on first field of entry editor should focus last field of previous tab",
+    "body": "https://github.com/JabRef/jabref/pull/13938 introduced the functionality to <kbd>Tab</kbd> through all fields of the entry editor.\n\nThere should be the inverse functionality: <kbd>Shift</kbd>+<kbd>Tab</kbd> should focus the previous field - and if there is no previous field on the current entry editor tab, focus the previous tab and the last field.\n\nCode can get inspirations from #13938.",
+    "commit_messages": [],
+    "labels": [
+      "component: entry-editor",
+      "good first issue",
+      "📍 Assigned",
+      "🔔 reminder-sent"
+    ]
+  },
+  {
+    "issue_id": 14505,
+    "title": "Enable resetting of ProxyPreferences",
+    "body": "`org.jabref.logic.net.ProxyPreferences` needs to be rewritten.\n\nSee https://github.com/JabRef/jabref/issues/14400 for the steps to do.\n\nFurthermore, use the new \"copy\" logic to simplify the creation of `backupProxyPreferences` in org.jabref.gui.preferences.network.NetworkTabViewModel#NetworkTabViewModel.",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality",
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14497,
+    "title": "Import old jabref preferences fails with npe odel.metadata.UserHostInfo.getUserHostString",
+    "body": "```\n org.jabref.migrations.PreferencesMigrations.moveApiKeysToKeyring()\nERROR: Unable to open key store: java.lang.NullPointerException: Cannot invoke \"org.jabref.model.metadata.UserHostInfo.getUserHostString()\" because \"this.userAndHost\" is null\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.getInternalPreferences(JabRefCliPreferences.java:1652)\n\tat org.jabref/org.jabref.migrations.PreferencesMigrations.moveApiKeysToKeyring(PreferencesMigrations.java:565)\n\tat org.jabref/org.jabref.migrations.PreferencesMigrations.runMigrations(PreferencesMigrations.java:70)\n\tat org.jabref/org.jabref.Launcher.main(Launcher.java:90)\n```\n\nin jabkit use `preferences import path/toJabRef.xml` and see the exception\n\nTask: Add `if` in appropriate place - or try to set user and host.\n\nAttached [JabRef.xml](https://github.com/user-attachments/files/23881888/JabRef.xml) can be checked-in and used for testing.\n\n",
+    "commit_messages": [
+      "Fix: Handled NullPointerException when importing old JabRef preferences (#14497)",
+      "fix: Added Changelog.md for issue #14497",
+      "Fix NPE when importing old JabRef preferences\n\nFixes #14497"
+    ],
+    "labels": [
+      "component: JabKit [cli]",
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14490,
+    "title": "NPE with preferences xml in root directory",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nOther (please describe below)\n\n### Details on version and operating system\n\nLinux Mint 22.2 Zara base: Ubuntu 24.04 noble\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. installed 6.0.31249 on Linux Mint Cinnamon\n2. Binary won't load\n\n\n\n### Appendix\n\nTerminal messages\n```\n$ /opt/jabref/bin/JabRef \nWARNING: Using incubator modules: jdk.incubator.vector\n2025-12-01 12:16:39 [main] org.jabref.Launcher.main()\nERROR: Could not launch JabRef: java.lang.NullPointerException: Cannot invoke \"java.util.prefs.Preferences.get(String, String)\" because \"this.prefs\" is null\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.get(JabRefCliPreferences.java:940)\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.getLanguage(JabRefCliPreferences.java:1685)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getWorkspacePreferencesFromBackingStore(JabRefGuiPreferences.java:673)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getWorkspacePreferences(JabRefGuiPreferences.java:640)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.importPreferences(JabRefGuiPreferences.java:420)\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.<init>(JabRefCliPreferences.java:504)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.<init>(JabRefGuiPreferences.java:247)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getInstance(JabRefGuiPreferences.java:386)\n\tat org.jabref/org.jabref.Launcher.main(Launcher.java:58)\nException in thread \"main\" java.lang.NullPointerException: Cannot invoke \"java.util.prefs.Preferences.get(String, String)\" because \"this.prefs\" is null\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.get(JabRefCliPreferences.java:940)\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.getLanguage(JabRefCliPreferences.java:1685)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getWorkspacePreferencesFromBackingStore(JabRefGuiPreferences.java:673)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getWorkspacePreferences(JabRefGuiPreferences.java:640)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.importPreferences(JabRefGuiPreferences.java:420)\n\tat org.jabref.jablib/org.jabref.logic.preferences.JabRefCliPreferences.<init>(JabRefCliPreferences.java:504)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.<init>(JabRefGuiPreferences.java:247)\n\tat org.jabref/org.jabref.gui.preferences.JabRefGuiPreferences.getInstance(JabRefGuiPreferences.java:386)\n\tat org.jabref/org.jabref.Launcher.main(Launcher.java:58)\n\n\n```",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences"
+    ]
+  },
+  {
+    "issue_id": 14480,
+    "title": "Refactor: Improve FileFieldParser parsing logic",
+    "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\nYes. I've identified a \"Long Method\" code smell in `org.jabref.logic.importer.util.FileFieldParser.java`.\n\nThe `parse()` method is overly complex and handles several distinct logical concerns within a single loop: checking for empty values, handling online links, and managing a character-by-character parsing state machine with multiple flags (like `xmlChar`, `escaped`, `windowsPath`). This makes the code difficult to read and maintain.\n\n**Describe the solution you'd like**\nI propose to refactor the `parse()` method using the \"Extract Method\" technique.\n\nI plan to break down the complex logic into smaller, well-named private helper methods. The goal is to make the main `parse()` method act as a high-level coordinator. This will significantly improve readability and make the parsing logic easier to maintain and test.\n\n**Additional context**\nI am a student in Ellen Spertus's class working on a code quality assignment. I identified this opportunity for improvement and would like to contribute the refactoring via a PR. @espertusnu \n",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality"
+    ]
+  },
+  {
+    "issue_id": 14454,
+    "title": "Add PersonNamesPlausibilityComparator",
+    "body": "I have \n\n<img width=\"968\" height=\"374\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/62f940f5-5259-4b09-a1e6-712b06d6962c\" />\n\nThe merge dialog should select the second column.\n\nTask:\n\n1. Create `org.jabref.logic.bibtex.comparator.plausibility.PersonNamesPlausibilityComparator`\n2. Wire it into `org.jabref.logic.bibtex.comparator.plausibility.PlausibilityComparatorFactory`. Use `org.jabref.model.entry.field.FieldProperty#PERSON_NAMES`\n\n---\n\nFor 1, use `org.jabref.model.entry.AuthorList#parse` and parse both sides.\n\n- If one side has more authors - use the side with more authors\n- Otherwise: Use the one with the longer string\n\n---\n\nOne can get this dialog when adding following entry to JabRef\n\n```bibtex\n@InProceedings{Guo2025,\n  author    = {Z.-Y. Guo and S.-H. Chen and A. Garland and W.-H. Chen and Y.-P. Liang and C.-M. Liu},\n  booktitle = {2025 IEEE 49th Annual Computers, Software, and Applications Conference (COMPSAC)},\n  title     = {Facilitating the Merging Process of Pull Requests in Automated-Testing Robot Framework},\n  year      = {2025},\n  address   = {Toronto, ON, Canada},\n  pages     = {2313--2318},\n  doi       = {10.1109/compsac65507.2025.00326},\n}\n```\n\n... and then presses the fetch button:\n\n<img width=\"869\" height=\"112\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/52f0a73e-f3ef-4e94-ae7a-fbe975d65550\" />",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14453,
+    "title": "\"Keyboard shortcuts changed\" appears at all preference changes",
+    "body": "I enabled AI in the settings.\n\nI press \"Save\"\n\nI get \"Keyboard shortcuts changed\" \n\n<img width=\"1169\" height=\"752\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/cb74fdaf-d7f2-45aa-86e9-8be85af94726\" />\n\nMaybe caused by https://github.com/JabRef/jabref/pull/14312 ? CC @AmandaBalderas20 \n\nThe popup should not appear if no keyboard shortcuts changed.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good third issue"
+    ]
+  },
+  {
+    "issue_id": 14452,
+    "title": "Use general word form",
+    "body": "Currently, we have \"entries\" and \"files\" even if there is only one.\n\n<img width=\"377\" height=\"311\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/c63d566d-aeb6-40c0-b3d5-69f599d9d8f5\" />\n\n1. Rename `Write metadata to PDF files` to `Write metadata to PDF file(s)`\n2. Rename `Copy linked files to folder...` to `Copy linked file(s) to folder...`\n\nThe \"LaTeX files...\" can stay, because that seemed too pedantic to me.\n\nRead on for localization https://devdocs.jabref.org/code-howtos/localization.html .",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14451,
+    "title": "Support `html` when parsing arXiv identifiers",
+    "body": "1. Copy `https://arxiv.org/html/2511.01348v2` into clipboard\n2. Click on \"Add entry using...\"\\\n    <img width=\"1137\" height=\"140\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/543ac398-6d9e-46bc-a998-81c835d4421c\" />\n3. See that \"Choose Entry Type\" is selected\n\nThere should be \"Enter Identifier\" selected.\n\nMaybe, \"only\" org.jabref.model.entry.identifier.ArXivIdentifier#ARXIV_PREFIX needs to be changed and a test be added.",
+    "commit_messages": [
+      "Support html when parsing arXiv identifiers (#14474)\n\n* Support html when parsing arXiv identifiers\n\n- Added 'html' to ARXIV_PREFIX regex pattern to recognize arxiv.org/html/ URLs\n- Added test cases for HTML URLs with HTTP/HTTPS and with/without version numbers\n\nFixes #14451\n\n* Fix checkstyle violations - separate variable declarations\n\n* Discard changes to .idea/codeStyles/Project.xml\n\n* Add CHANGELOG.md entry\n\n* Fix alphabetical ordering\n\n---------\n\nCo-authored-by: Oliver Kopp <kopp.dev@gmail.com>",
+      "Support html when parsing arXiv identifiers (#14474)\n\n* Support html when parsing arXiv identifiers\n\n- Added 'html' to ARXIV_PREFIX regex pattern to recognize arxiv.org/html/ URLs\n- Added test cases for HTML URLs with HTTP/HTTPS and with/without version numbers\n\nFixes #14451\n\n* Fix checkstyle violations - separate variable declarations\n\n* Discard changes to .idea/codeStyles/Project.xml\n\n* Add CHANGELOG.md entry\n\n* Fix alphabetical ordering\n\n---------\n\nCo-authored-by: Oliver Kopp <kopp.dev@gmail.com>"
+    ],
+    "labels": [
+      "good first issue",
+      "📍 Assigned"
+    ]
+  },
+  {
+    "issue_id": 14430,
+    "title": "Offer selection of CitationProvider in \"Citations\" tab",
+    "body": "JabRef offers  to display cited and citing papers. \n\n<img width=\"1087\" height=\"784\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ceeba2d9-67dc-4d59-a014-f228b9c242ee\" />\n\nThereby, it used the interface `CitationFetcher`:\n\nhttps://github.com/JabRef/jabref/blob/939b018668ef36e634561ea53974b8746be7b3e2/jablib/src/main/java/org/jabref/logic/importer/fetcher/citation/CitationFetcher.java#L15\n\nThere are currently two implementations.\n\nOnly one is used in the GUI:\n\nhttps://github.com/JabRef/jabref/blob/939b018668ef36e634561ea53974b8746be7b3e2/jablib/src/main/java/org/jabref/logic/citation/SearchCitationsRelationsService.java#L33\n\nThe CLI offers selecting one:\n\n\nhttps://github.com/JabRef/jabref/blob/939b018668ef36e634561ea53974b8746be7b3e2/jabkit/src/main/java/org/jabref/toolkit/commands/GetCitedWorks.java#L47-L67\n\n## Task\n\n- Create `CitationFetcherFactory` in package `org.jabref.logic.importer.fetcher.citation`. Use `enum` and `INSTANCE`\n- Implement method `getCitationFetcher` accepting a `String` as first paramter\n  - The method checks org.jabref.logic.importer.fetcher.citation.crossref.CrossRefCitationFetcher#getName / org.jabref.logic.importer.fetcher.citation.semanticscholar.SemanticScholarCitationFetcher#getName and returns a new instance of the fetcher. The parameters are a union of the parameters of the respective constructors\n- Add a dropdown to the citation panel (the left panel)\n  - Dropdown has \"CrossRef\" and \"SemanticScholar\" as values\n  - DropDown state is stored in `org.jabref.gui.entryeditor.EntryEditorPreferences` (see how other classes to that; also handle the default (\"SemanticScholar\")\n  - Location is somewhere at org.jabref.gui.entryeditor.citationrelationtab.CitationRelationsTab#getPaneAndStartSearch.\n- Have org.jabref.toolkit.commands.GetCitedWorks#call using this factory.\n - Minor: Change `Crossref` to `CrossRef` at org.jabref.logic.importer.fetcher.citation.crossref.CrossRefCitationFetcher#getName",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📌 Pinned",
+      "component: citation-relations"
+    ]
+  },
+  {
+    "issue_id": 14428,
+    "title": "Fix JabKit's `--version` output",
+    "body": "Currently `jabkit --version` outputs nothing:\n\n```cmd\nc:\\git-repositories>jabkit --version\n\nc:\\git-repositories>\n```\n\n`--help` outputs the version\n\n```\nc:\\git-repositories>jabkit --help\n\n   &&&    &&&&&    &&&&&&&&   &&&&&&&&   &&&&&&&&& &&&&&&&&&\n   &&&    &&&&&    &&&   &&&  &&&   &&&  &&&       &&&\n   &&&   &&& &&&   &&&   &&&  &&&   &&&  &&&       &&&\n   &&&   &&   &&   &&&&&&&    &&&&&&&&   &&&&&&&&  &&&&&&&\n   &&&  &&&&&&&&&  &&&   &&&  &&&   &&&  &&&       &&&\n   &&&  &&&   &&&  &&&   &&&  &&&   &&&  &&&       &&&\n&&&&&   &&&   &&&  &&&&&&&&   &&&   &&&  &&&&&&&&& &&&\n\nVersion: 6.0-alpha.197--2025-11-24--0a9793a\nStaying on top of your literature since 2003 - https://www.jabref.org/\nPlease report issues at https://github.com/JabRef/jabref/issues\n\nJabKit - command line toolkit for JabRef\nUsage: jabkit [-dhpv] [COMMAND]\n...\nc:\\git-repositories>\n```\n\nWish: \n\nThe version is output on the command line#\n\n    6.0-alpha.197--2025-11-24--0a9793a\n\nSimilar to `jbang --version`\n\n```\nc:\\git-repositories>jbang --version\n0.132.1\n\nc:\\git-repositories>\n```\n\n## Hints\n\nThe variable is in place: org.jabref.toolkit.commands.JabKit#versionInfoRequested, but not read yet.\n\nRead on at https://picocli.info/#_version_help for a howto for PicoCLI.\n\n    int result = commandLine.execute(args);\n\nIt might be that `--version` is done wrong currently and just a `VersionedCommand` needs to be implemented.\n\n### Run JabKit:\n\n<img width=\"1376\" height=\"646\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/e2a1f728-c98b-4036-9ae8-9392c63677d9\" />\n\nModify run configuration:\n\n<img width=\"2880\" height=\"1010\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/75f69559-03cc-4f9f-a8c6-dfc2cbec1361\" />\n\nInstalling JabKit: https://github.com/JabRef/jabref/tree/main/.jbang#installing-and-running-jabkit-with-jbang - not required to solve the issue but helpful to understand how the outputs above are produced.",
+    "commit_messages": [
+      "fix: Implement --version flag output in JabKit CLI\n\nPreviously, running `jabkit --version` produced no output.\r\n\r\nThis fix adds logic in the run() method to check if the\r\nversionInfoRequested flag is set. When true, it outputs\r\njust the version string (e.g., \"6.0-alpha.197--2025-11-24--0a9793a\")\r\nand returns early.\r\n\r\nFixes #14428",
+      "fix: Implement --version flag output in JabKit CLI (#14431)\n\nPreviously, running `jabkit --version` produced no output.\r\n\r\nThis fix adds logic in the run() method to check if the\r\nversionInfoRequested flag is set. When true, it outputs\r\njust the version string (e.g., \"6.0-alpha.197--2025-11-24--0a9793a\")\r\nand returns early.\r\n\r\nFixes #14428",
+      "Update JabKit.java\n\nThis is fix for issue #14428\r\nIssue description:- \r\nWhen invoking jabkit --version, the output did not correctly reflect the current version/build information — version number was missing or incorrect, making it confusing for users to know which version of JabKit they were running. This issue is tracked under Issue #14428.\r\n\r\nFix Resolution:-\r\nWhat this PR does\r\nUpdates the JabKit CLI command configuration so that the --version (or -v) flag prints the correct version number of the build.\r\nEnsures the version information is retrieved dynamically from build metadata (e.g., project version specified in build configuration), rather than being hard‑coded or empty.\r\nAdjusts the @Command (Picocli) annotation for the main CLI entry point to include the version information."
+    ],
+    "labels": [
+      "component: JabKit [cli]",
+      "good first issue"
+    ]
+  },
+  {
+    "issue_id": 14417,
+    "title": "Enable resetting of DonationPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14416,
+    "title": "Enable resetting of NewEntryPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14415,
+    "title": "Enable resetting of CopyToPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [
+      "Refactor CopyToPreferences defaults\n\nMoved the default values for 'includeCrossReferences' and 'askForIncludingCrossReferences' for JabRefGuiPreferences into CopyToPreferences.\n\nThis encapsulates the default logic within the preference class itself, enabling resetting of preferences in the future.\n\nCloses #14415",
+      "Refactor CopyToPreferences defaults (#14601)\n\n* Refactor CopyToPreferences defaults\n\nMoved the default values for 'includeCrossReferences' and 'askForIncludingCrossReferences' for JabRefGuiPreferences into CopyToPreferences.\n\nThis encapsulates the default logic within the preference class itself, enabling resetting of preferences in the future.\n\nCloses #14415\n\n* Fix constructor order for Checkstyle.\n\n* Apply review feedback: Remove defaults from map\n\n* ci: trigger rerun\n\n* Refactor CopyToPreferences to use Backing Store pattern\n\n* Move setAll\n\n* Added comments\n\n* Fix import\n\n---------\n\nCo-authored-by: Carl Christian Snethlage <50491877+calixtus@users.noreply.github.com>\nCo-authored-by: Carl Christian Snethlage <calixtus@users.noreply.github.com>"
+    ],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14414,
+    "title": "Enable resetting of ColumnPreferences",
+    "body": "See #14400 for the steps to do.\n\nDo it for both `mainTableColumnPreferences` and `searchDialogColumnPreferences`,\n\nNOTE: This could be harder than the others. See the closed PRs for issues.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14413,
+    "title": "Enable resetting of MainTablePreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [
+      "feat: Add resetting methods to MainTablePreferences  Follows pattern from PR #13894 (WorkspacePreferences) Closes #14413"
+    ],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14409,
+    "title": "Enable resetting of SpecialFieldsPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [
+      "Add getDefault() and setAll() methods to SpecialFieldsPreferences\n\n- Added private default constructor with default specialFieldsEnabled = true\r\n- Added static getDefault() method to create default preferences\r\n- Added setAll() method to reset preferences from another instance\r\n\r\nFixes #14409",
+      "Add SpecialFieldsPreferences reset handling in clear() and importPreferences()\n\n- Added getSpecialFieldsPreferences().setAll() call in clear() method\r\n- Added getSpecialFieldsPreferencesFromBackingStore() helper method\r\n- Added reset handling in importPreferences() method\r\n\r\nFixes #14409",
+      "Refactor SpecialFieldsPreferences to support reset/reload (#14409)"
+    ],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14408,
+    "title": "Enable resetting of GroupsPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14407,
+    "title": "Enable resetting of SidePanePreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [
+      "Initial Changes for issue #14407",
+      "Initial Changes for issue #14407",
+      "Reset and Import for SidePanePreferences (#14589)\n\n* Initial Changes for issue #14407\n\n* Added the Default constructor, getDefault, setVisiblePanes and setAll Methods in SidePanePreferences and added the getSidePanePreferencesFromBackingStore method in JabRefGuiPreferences with proper updates in clear and importPreferences.\n\n* Modified getSidePanePreferencesFromBackingStore to have proper implementation\n\n* Improved logic for getSidePanePreferencesFromBackingStore\n\n* Revert \"Improved logic for getSidePanePreferencesFromBackingStore\"\n\nThis reverts commit f491b95ff604fd7caabead1b1e4f6e40e0f1bb3f.\n\n# Conflicts:\n#\tjabgui/src/main/java/org/jabref/gui/preferences/JabRefGuiPreferences.java\n\n* Revert \"Improved logic for getSidePanePreferencesFromBackingStore\"\n\nThis reverts commit f491b95ff604fd7caabead1b1e4f6e40e0f1bb3f.\n\n* Corrected the changes disrupted by one of the merge\n\n* Refactored getSidePanePreferencesFromBackingStore with better logic"
+    ],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "🔔 reminder-sent"
+    ]
+  },
+  {
+    "issue_id": 14406,
+    "title": "Enable resetting of ExternalApplicationsPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14405,
+    "title": "Enable resetting of UnlinkedFilesDialogPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14404,
+    "title": "Enable resetting of CoreGuiPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14403,
+    "title": "Enable resetting of AutoCompletePreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "🔔 reminder-sent"
+    ]
+  },
+  {
+    "issue_id": 14402,
+    "title": "Enable resetting of MergeDialogPreferences",
+    "body": "See #14400 for the steps to do.",
+    "commit_messages": [
+      "Refactor MergeDialogPreferences to support resetting\nMoves default values from JabRefGuiPreferences to the MergeDialogPreferences class and implements the setAll method to allow resetting to defaults.\n\nFixes #14402",
+      "Refactor MergeDialogPreferences to support resetting (#14616)\n\n* Refactor MergeDialogPreferences to support resetting\nMoves default values from JabRefGuiPreferences to the MergeDialogPreferences class and implements the setAll method to allow resetting to defaults.\n\nFixes #14402\n\n* Fix checkstyle: correct commenting format\n\n* Refactor JabRefGuiPreferences to streamline merge dialog preferences retrieval\n\n* Refactor MergeDialogPreferences constructor for improved readability\n\n* Indent\n\n* Minor tweaks\n\n---------\n\nCo-authored-by: Carl Christian Snethlage <50491877+calixtus@users.noreply.github.com>\nCo-authored-by: Carl Christian Snethlage <calixtus@users.noreply.github.com>"
+    ],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14381,
+    "title": "Add \"Close library\" to menu",
+    "body": "Currently, it is not possible to close a single library\n\n<img width=\"446\" height=\"701\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d4693047-6d15-4c9d-a316-02605150ce8f\" />\n\nWord has it as follows:\n\n<img width=\"282\" height=\"913\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/09c7a49e-6de8-4030-85ce-1702d351e46a\" />\n\nTask:\n\nAdd close functionality below \"Save all\"\n\n<img width=\"709\" height=\"676\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/3c2f1f79-9533-4253-8abf-6df1412e6c9f\" />\n\n---\n\nFunctionality already exists -- in case on has opened multiple tabs\n\n\n<img width=\"420\" height=\"341\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/8e63ce6d-dbcf-4c73-b9b9-01adfb530463\" />\n\nHint: check that this functionality is only enabled if any library is opened.",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14362,
+    "title": "Fix typos in CONTRIBUTING.md (Pull Request Process & Submission sections)",
+    "body": "### Description\nWhile setting up my local workspace for contribution, I noticed a few typographical errors in the `CONTRIBUTING.md` documentation.\n\n### Locations & Fixes\nI have identified the following three errors that need correction:\n\n1. **Section:** `## Pull Request Process` (Step 6)\n   - **Current:** \"Have fun. Learn. **Communictate**.\"\n   - **Proposed:** \"Have fun. Learn. **Communicate**.\"\n\n2. **Section:** `### After submission of a pull request` (Paragraph 3)\n   - **Current:** \"As a **concequece**, force-pushing is not required...\"\n   - **Proposed:** \"As a **consequence**, force-pushing is not required...\"\n\n3. **Section:** `### After submission of a pull request` (Paragraph 4)\n   - **Current:** \"The pull request may be approved **immediatly**...\"\n   - **Proposed:** \"The pull request may be approved **immediately**...\"\n\n### Plan\nI plan to create a PR to fix these spelling errors to improve the readability of the contribution guidelines.",
+    "commit_messages": [
+      "Fix typos in CONTRIBUTING.md\n\nFixes #14362",
+      "Fix typos in CONTRIBUTING.md (#14363)\n\nFixes #14362"
+    ],
+    "labels": [
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14361,
+    "title": "Enable parameters for CLI: generate-citation-keys",
+    "body": "Currently, the `generate-citation-keys` command from JabKit doesn't allow for customization\n\n```\nUsage: jabkit generate-citation-keys [-dhp] --input=<inputFile>\n                                     [--output=<outputFile>]\nGenerate citation keys for entries in a .bib file.\n  -d, --debug               Enable debug output\n  -h, --help                display this help message\n      --input=<inputFile>   Input BibTeX file\n      --output=<outputFile> The output .bib file.\n  -p, --porcelain           Enable script-friendly output\n```\n\nHowever, JabRef allows for much customization: https://docs.jabref.org/setup/citationkeypatterns\n\nThis should also be offered in the CLI.\n\nYou can check the GUI for the options\n\n<img width=\"1120\" height=\"872\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/834aa35b-b52c-42bf-b825-a579547a62e1\" />\n\nTask:\n\n- Offer each element of `CitationKeyPatternPreferences` as parameter in the CLI for `org.jabref.toolkit.commands.GenerateCitationKeys`\n- Thereby, construct new `org.jabref.logic.citationkeypattern.CitationKeyPatternPreferences` based on CLI options. If no option is provided for a parameter, use the values from user-configured `JabRefCliPreferences` (argumentProcessor.cliPreferences).\n\nHints:\n\n- You can use org.jabref.toolkit.converter.CaseInsensitiveEnumConverter to convert an enum (see usage of the class for how to do)\n- Key patterns is a map, which can be implemented in PicoCLI using https://picocli.info/#_maps",
+    "commit_messages": [],
+    "labels": [
+      "component: JabKit [cli]",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "🔔 reminder-sent"
+    ]
+  },
+  {
+    "issue_id": 14358,
+    "title": "Make --help output consistent",
+    "body": "Current output:\n\n```\n$ jbang jabkit@jabref generate-citation-keys --help\n2025-11-20 09:38:14 [main] org.jabref.logic.journals.JournalAbbreviationLoader.loadRepository()\nINFO: Loaded journal abbreviations from C:\\Users\\koppor\\AppData\\Local\\Temp\\jabref-journal7071332944653563471\\journal-list.mv\nUsage: jabkit generate-citation-keys [-dhp] --input=<inputFile>\n                                     [--output=<outputFile>]\nGenerate citation keys for entries in a .bib file.\n  -d, --debug               Enable debug output\n  -h, --help                display this help message\n      --input=<inputFile>   Input BibTeX file\n      --output=<outputFile> The output .bib file.\n  -p, --porcelain           Enable script-friendly output\n\n```\n\nTask:\n\n1. Change `Input BibTeX file` to `Input .bib file`\n2. Change `The output .bib file` to `Output .bib file` (without dot at the end)\n3. Change `display this help message` to `Display this help message`\n\nThis is a nice opportunity to learn about <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> in IntelliJ.\n\n",
+    "commit_messages": [
+      "Refactor input option description for clarity\n\nFix: Update CLI help descriptions for generate-citation-keys (#14358)\r\n\r\nThis commit updates the help text of the `generate-citation-keys` command:\r\n\r\n- \"Input BibTeX file\" → \"Input .bib file\"\r\n- \"The output .bib file.\" → \"Output .bib file\"\r\n- \"display this help message\" → \"Display this help message\"\r\n\r\nThese changes improve clarity, remove redundant articles/punctuation,\r\nand ensure consistent capitalization across CLI options.",
+      "Update GenerateCitationKeys.java\n\nFix: Update CLI help descriptions for generate-citation-keys (#14358)\r\n\r\nThis commit updates the help text of the `generate-citation-keys` command:\r\n\r\n- \"Input BibTeX file\" → \"Input .bib file\"\r\n- \"The output .bib file.\" → \"Output .bib file\"\r\n- \"display this help message\" → \"Display this help message\"\r\n\r\nThese changes improve clarity, remove redundant articles/punctuation,\r\nand ensure consistent capitalization across CLI options.",
+      "fix for issue #14358",
+      "Make --help output consistent - Fix for #14358 (#14423)\n\n* fix for issue #14358\n\n* Addressed comment\n\n---------\n\nCo-authored-by: Carl Christian Snethlage <50491877+calixtus@users.noreply.github.com>",
+      "Make --help output consistent - Fix for #14358 (#14423)\n\n* fix for issue #14358\n\n* Addressed comment\n\n---------\n\nCo-authored-by: Carl Christian Snethlage <50491877+calixtus@users.noreply.github.com>"
+    ],
+    "labels": [
+      "component: JabKit [cli]",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14355,
+    "title": "Move to Jackson 3: forgotten imports in UnpaywallFetcher can cause issue",
+    "body": "It looks like the imports\nhttps://github.com/JabRef/jabref/blob/main/jablib/src/main/java/org/jabref/logic/importer/fetcher/UnpaywallFetcher.java#L20\nin line 20 and 21 have not been adjusted to Jackson 3.\n\nThis makes Jackson 2 an unexpected dependency.  I don't know how this could pass tests, but in my (non-gradle) build I get the issue\n```\n.../src/main/java/org/jabref/logic/importer/fetcher/UnpaywallFetcher.java:20: error: package com.fasterxml.jackson.databind is not visible\nimport com.fasterxml.jackson.databind.JsonNode;\n                            ^\n  (package com.fasterxml.jackson.databind is declared in module com.fasterxml.jackson.databind, but module org.jabref.jablib does not read it)\n```\nand a similar one for `ObjectMapper`.\nI assume by some magic trick gradle's automatic resolution somehow circumvents this issue. Still, it should be fixed. All that needs to be done is replace\n```java\nimport com.fasterxml.jackson.databind.JsonNode;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n```\nby\n```java\nimport tools.jackson.databind.JsonNode;\nimport tools.jackson.databind.ObjectMapper;\n```\nin `UnpaywallFetcher.java`.",
+    "commit_messages": [
+      "fix jackson imports\n\nFixes https://github.com/JabRef/jabref/issues/14355",
+      "fix jackson imports (#14356)\n\nFixes https://github.com/JabRef/jabref/issues/14355",
+      "fix jackson imports (#14356)\n\nFixes https://github.com/JabRef/jabref/issues/14355"
+    ],
+    "labels": []
+  },
+  {
+    "issue_id": 14352,
+    "title": "Add right click option to delete custom bst style for entry preview",
+    "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\nI can add a new custom BST style in JabRef for entry preview but I have no option to remove it.\n\n**Describe the solution you'd like**\nAdd a right click option to remove the style. This should only be possible for bst styles.\n\n**Additional context**\nExample bst files can be found in jabref/jablib/src/test/resources/org/jabref/logic/bst/IEEEtran.bst\n\n<img width=\"2198\" height=\"1450\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/98e1f75c-fe83-49b2-9d41-973a9a3cc43b\" />\n",
+    "commit_messages": [],
+    "labels": [
+      "component: entry-preview",
+      "good first issue",
+      "📍 Assigned"
+    ]
+  },
+  {
+    "issue_id": 14348,
+    "title": "Rewrite `CustomizableKeyFetcher#getTestUrl`",
+    "body": "`org.jabref.logic.importer.fetcher.CustomizableKeyFetcher#getTestUrl` just returns an URL and the assumption at `org.jabref.gui.preferences.websearch.WebSearchTabViewModel#checkApiKey` is that the API key is just appended. It should be changed to a logic where the URL is constructed in each fetcher\n\n https://github.com/JabRef/jabref/blob/f83fd80e944a8f7516540c3d5d65160757092bf5/jabgui/src/main/java/org/jabref/gui/preferences/websearch/WebSearchTabViewModel.java#L310\n\n---\n\nHowever, the \"real\" solution is to adapt `org.jabref.logic.importer.fetcher.CustomizableKeyFetcher#getTestUrl` to `boolean apiKeyValid` and each fetcher could check for itself. This is more work - and one needs to dive into each fetcher.",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality",
+      "component: fetcher",
+      "good second issue"
+    ]
+  },
+  {
+    "issue_id": 14346,
+    "title": "Code Refactoring",
+    "body": "Several utility classes in the codebase contain only static methods but lack both the `final` modifier and a private constructor to prevent instantiation and subclassing. This violates Java best practices for utility classes and could lead to misuse.\n\nAdd the `final` modifier to each utility class declaration and include a private constructor that throws `UnsupportedOperationException` to explicitly prevent instantiation. This follows the standard pattern recommended in \"Effective Java\" by Joshua Bloch.\n\n**Affected classes:**\n1. `org.jabref.logic.icore.ConferenceUtils`\n2. `org.jabref.logic.ai.util.CitationKeyCheck`\n3. `org.jabref.logic.importer.util.StaxParser`\n4. `org.jabref.logic.importer.util.JsonReader`\n5. `org.jabref.logic.importer.util.MathMLParser`\n6. `org.jabref.logic.git.merge.planning.util.ConflictRules`\n\nThis refactoring has no behavioral changes and improves code quality by making the intent of these utility classes explicit. Each class will be addressed in a separate pull request for easier review.\n\nThis was discussed and approved on Gitter by @koppor .",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14334,
+    "title": "Missing Spanish translations in UI",
+    "body": "### JabRef version\n\n5.15 (latest release)\n\n### Operating system\n\nWindows\n\n### Details on version and operating system\n\nWindows 10 Enterprise LTSC 21H2\n\n### Checked with the [latest development build](https://builds.jabref.org/main/) (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Abrir la app.\n2. Ir a Options > Preferences > Language\n3. Seleccionar Español\n\n\n### Appendix\n\nAdjunto algunas capturas\n\n<img width=\"358\" height=\"273\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/7139d179-ce56-4ada-9f3e-489ff4f3331c\" />\n\n<img width=\"617\" height=\"200\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/518ae041-1666-4057-a078-43635424fd07\" />\n\n<img width=\"992\" height=\"757\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/bf65314b-65a0-45a6-81ca-82d9fc73c1e6\" />\n\n<img width=\"414\" height=\"345\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/2b15d8a5-7734-4652-84ff-fed83f7cfb73\" />\n\nHi! My English isn't very good, I'm Argentinian, and I'd like to start collaborating on the project. While translating it into Spanish, I found some untranslated texts.\nIf you think this is something worth addressing, I'd be happy to help.\n\n\n",
+    "commit_messages": [],
+    "labels": [
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14280,
+    "title": "Refactor Formatter and FieldFormatterCleanups for clearer structure and simpler class responsibilities",
+    "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\nSome logic in org.jabref.logic.cleanup is placed in the wrong layer or mixes responsibilities:\n- Formatter is a base class for string formatters but lives in the cleanup package.\n- FieldFormatterCleanups handles both parsing/serialization and cleanup execution\n\n**Describe the solution you'd like**\n- Move Formatter to org.jabref.logic.formatter.\n- Refactor and rename FieldFormatterCleanups and extract its parsing logic to a small helper like FieldFormatterCleanupParser.\n- Keep public behavior unchanged.\n\n**Additional context**\nThis is a small, non-functional refactor touching mainly:\n- Formatter.java (moved)\n- FieldFormatterCleanups.java (renamed + internal refactor) \nwith only minor import updates in related logic and test",
+    "commit_messages": [
+      "Refactor formatter cleanup classes (Issue #14280)\n\nRefactor Formatter and FieldFormatterCleanups in package\norg.jabref.logic.cleanup.\n\n- Move Formatter to logic.formatter package, as base class of\n  other formatters.\n- Rename FieldFormatterCleanups to FieldFormatterCleanupActions.\n- Abstract parsing logic to a new class named\n  FieldFormatterCleanupParser.",
+      "Refactor formatter cleanup classes (#14285)\n\n* Refactor formatter cleanup classes (Issue #14280)\n\nRefactor Formatter and FieldFormatterCleanups in package\norg.jabref.logic.cleanup.\n\n- Move Formatter to logic.formatter package, as base class of\n  other formatters.\n- Rename FieldFormatterCleanups to FieldFormatterCleanupActions.\n- Abstract parsing logic to a new class named\n  FieldFormatterCleanupParser.\n\n* Fix merge conflicts\n\n* Address review comments\n\n---------\n\nCo-authored-by: Carl Christian Snethlage <calixtus@users.noreply.github.com>\nCo-authored-by: Carl Christian Snethlage <50491877+calixtus@users.noreply.github.com>"
+    ],
+    "labels": [
+      "dev: code-quality",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14247,
+    "title": "Testing Issue Creation for Open Source Practice",
+    "body": "This is a test issue created for practice purposes only.  \nPlease do not take any action or merge anything related to this issue.  \nI’m just learning how to raise issues on GitHub.  \nThank you!\n",
+    "commit_messages": [],
+    "labels": []
+  },
+  {
+    "issue_id": 14246,
+    "title": "“Add custom properties on CAYW endpoint” — #13821 in the JabRef /jabref repository.",
+    "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\nA clear and concise description of what the problem is. Ex. I'm always frustrated when [...]\n\n**Describe the solution you'd like**\nA clear and concise description of what you want to happen.\n\n**Additional context**\nAdd any other context or screenshots about the feature request here.\n",
+    "commit_messages": [],
+    "labels": []
+  },
+  {
+    "issue_id": 14242,
+    "title": "Total count in date group and other Automatic Groups missing",
+    "body": "follow up from https://github.com/JabRef/jabref/pull/14169\n \n1. Open Chocolate.bib\n4. Add date group - group by date. Name it \"Date\"\n5. see \\\n     <img width=\"239\" height=\"379\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/2750e9f3-462e-41b1-b8fc-d4a47fe1c92e\" />\n\nExpected: \"Date\" shows sum of all entry counts below. As is: 0 is shown.",
+    "commit_messages": [],
+    "labels": [
+      "component: groups",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14237,
+    "title": "Unable to change any keyboard shortcut",
+    "body": "### JabRef version\n\n5.15 (latest release)\n\n### Operating system\n\nmacOS\n\n### Details on version and operating system\n\nTahoe 26.0.1 (25A362)\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Open Jabref\n2. Select File > Preferences > Keyboard shortcuts\n3. Select any Entry, e.g. File > Close Library\n4. Click on the entry OR Right click on the entry OR double click on the entry\n5. Type the key / key combination that you want instead for this action\n6. See bug: Nothing happens\n\n### Appendix\n\nI'm not entirely sure how the keybindings are supposed to be customized (see step 5), but I cannot get any alternative keybinding to get registered for any action.\nThe documentation doesn't help: https://github.com/JabRef/user-documentation/blob/main/en/setup/customkeybindings.md\n\n<summary>Log File</summary>\n\n```\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nColumn type '' is unknown.\nPreferences recorded.\nLoaded journal abbreviations from /var/folders/h8/0qhzg4jx4vqcssrpvr04qfvh0000gn/T/jabref-journal17856100271165778619/journal-list.mv\n```\n\n</details>\n",
+    "commit_messages": [
+      "Fix: editing keyboard shortcuts in Preferences (closes #14237)",
+      "test: update keybinding tests after fix #14237 and add explanation comment",
+      "Fix: Keyboard shortcuts cannot be edited in Preferences (closes #14237) (#14312)\n\nCo-authored-by: Christoph <siedlerkiller@gmail.com>\nCo-authored-by: Ruslan Popov <ruslanpopov1512@gmail.com>",
+      "Make Keybaord Shortcuts OS independent for ctrl\n\nFixes #14237",
+      "Make Keybaord Shortcuts OS independent for ctrl (#14684)\n\n* Make Keybaord Shortcuts OS independent for ctrl\n\nFixes #14237\n\n* Fix keyboard shortcut rendering in CHANGELOG.md\n\n* add hint from javadoc\n\n---------\n\nCo-authored-by: Oliver Kopp <kopp.dev@gmail.com>"
+    ],
+    "labels": [
+      "component: keybinding"
+    ]
+  },
+  {
+    "issue_id": 14211,
+    "title": "Snapcraft build broken",
+    "body": "https://snapcraft.io/jabref/builds\n\n<img width=\"1421\" height=\"362\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/dcc68294-f282-4b2f-969f-ad9075677c1e\" />\n",
+    "commit_messages": [],
+    "labels": []
+  },
+  {
+    "issue_id": 14154,
+    "title": "Jabkit preferences does not work.",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nEndeavour OS; kernel:  6.16.7-arch1-1 \n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n`jabkit preferences [export | import | reset]` \nThen you get an exception.\n\n```\npicocli.CommandLine$InitializationException: Cannot instantiate org.jabref.cli.Preferences$PreferencesExport: the class has no constructor\n\tat picocli.CommandLine$DefaultFactory.create(CommandLine.java:5693)\n\tat picocli.CommandLine$Model$CommandUserObject.getInstance(CommandLine.java:12296)\n\tat picocli.CommandLine$Model$CommandSpec.userObject(CommandLine.java:6445)\n\tat picocli.CommandLine$Interpreter.clear(CommandLine.java:13553)\n\tat picocli.CommandLine$Interpreter.parse(CommandLine.java:13599)\n\tat picocli.CommandLine$Interpreter.processSubcommand(CommandLine.java:13938)\n\tat picocli.CommandLine$Interpreter.processArguments(CommandLine.java:13834)\n\tat picocli.CommandLine$Interpreter.parse(CommandLine.java:13620)\n\tat picocli.CommandLine$Interpreter.processSubcommand(CommandLine.java:13938)\n\tat picocli.CommandLine$Interpreter.processArguments(CommandLine.java:13834)\n\tat picocli.CommandLine$Interpreter.parse(CommandLine.java:13620)\n\tat picocli.CommandLine$Interpreter.parse(CommandLine.java:13588)\n\tat picocli.CommandLine$Interpreter.parse(CommandLine.java:13483)\n\tat picocli.CommandLine.parseArgs(CommandLine.java:1552)\n\tat picocli.CommandLine.execute(CommandLine.java:2173)\n\tat org.jabref.JabKit.main(JabKit.java:99)\n\tat JabKitLauncher.main(JabKitLauncher.java:45)\nCaused by: java.lang.NoSuchMethodException: org.jabref.cli.Preferences$PreferencesExport.<init>()\n\tat java.base/java.lang.Class.getConstructor0(Class.java:3218)\n\tat java.base/java.lang.Class.getDeclaredConstructor(Class.java:2493)\n\tat picocli.CommandLine$DefaultFactory.create(CommandLine.java:5664)\n\tat picocli.CommandLine$DefaultFactory.create(CommandLine.java:5691)\n        ... 16 more\n```\n\nit appears that the Preferences class defines non static inner classes, and thus no constructor can be called for them from the static Preferences.\n\nShould be an easy fix. \n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
+    "labels": [
+      "component: JabKit [cli]",
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14150,
+    "title": "Fix StringUtil package and methods",
+    "body": "`StringUtil` is in package `org.jabref.model.strings` - it should be in logic package.\n\n- [ ] Move `StringUtil` to package `org.jabref.logic.util.strings`. Adapt tests (at least move the test class) and code accordingly.\n\n---\n\n\n`org.jabref.logic.database.DuplicateCheck#correlateByWords` is a single String handling method.\n\n- [ ]  Move `org.jabref.logic.database.DuplicateCheck#correlateByWords` to `org.jabref.logic.util.strings.StringSimilarity`. Adapt tests and code accordingly.\n",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14143,
+    "title": "Rewrite \"Imported Entries\" feature",
+    "body": "This is a follow-up to https://github.com/JabRef/jabref/pull/12998.\n\n1. Remove `SmartGroup`\n2. Replace by an `ExplicitGroup`\n\n---\n\nMoreover, the architecture of https://github.com/JabRef/jabref/pull/12997 should be fixed\n\norg.jabref.gui.groups.JabRefSuggestedGroups has to be moved to org.jabref.logic.groups.DefaultGroupsFactory\n\n1. Rename org.jabref.logic.groups.DefaultGroupsFactory to `GroupsFactory`\n2. Move the two factory methods from `JabRefSuggestedGroups`\n3. Remove `JabRefSuggestedGroups`\n",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "size: small"
+    ]
+  },
+  {
+    "issue_id": 14132,
+    "title": "Refactor long method importDatabase() in OvidImporter",
+    "body": "\n**Is your suggestion for improvement related to a problem? Please describe.**\nThe `importDatabase()` method in [OvidImporter](https://github.com/JabRef/jabref/blob/main/jablib/src/main/java/org/jabref/logic/importer/fileformat/OvidImporter.java) has grown into a long method that mixes multiple functionalities including record splitting, per-field parsing, regex handling for Source fields, and final cleanup. This makes it harder to understand, test, and maintain.\n\n**Describe the solution you'd like**\nI’d like to refactor `importDatabase()` by extracting several small private helper methods (`parseSource()`, `parseField()`, `normalizeContributors()`, and `resolveEntryType()`) while preserving all current behavior and public APIs. The goal is purely to improve readability and separation of concerns, not to change functionality.\n\n**Additional context**\nThis refactoring proposal was discussed and approved on the JabRef Gitter channel.\n\nWould you prefer helper methods like these to be annotated with `@VisibleForTesting` and have direct unit tests, or should testing rely solely on the existing integration-level coverage for `OvidImporter`? I understand there are different schools of thought on this and would like to follow JabRef’s convention.\n",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality",
+      "📍 Assigned",
+      "📌 Pinned",
+      "🔔 reminder-sent"
+    ]
+  },
+  {
+    "issue_id": 14130,
+    "title": "Ctrl+Shift+L should open current library directory",
+    "body": "### JabRef version\n\n5.15 (latest release)\n\n### Operating system\n\nWindows\n\n### Details on version and operating system\n\nWindows 11 25H2\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Open two different libraries in different folder\n2. Press Ctrl+Shift+L, which is the shortcut key for \"Opening terminal here\"\n3. The terminal is opened, but the directory is not the currently opened library\n\n\n### Appendix\n\n_No response_",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14122,
+    "title": "Pseudonymization does not work correctly.",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nWindows\n\n### Details on version and operating system\n\n6.16.7-arch1-1, EndeavourOS Linux x86_64\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. run `$ ./gradlew run:jabkit --args='pseudonymize --input=\"some_bib.bib\"'`\n\noutput:\n\n```\njava.lang.NullPointerException: Cannot invoke \"java.nio.file.Path.toString()\" because \"this.outputFile\" is null\n        at org.jabref.jabkit/org.jabref.cli.Pseudonymize.run(Pseudonymize.java:53)\n        at info.picocli@4.7.7/picocli.CommandLine.executeUserObject(CommandLine.java:2045)\n        at info.picocli@4.7.7/picocli.CommandLine.access$1500(CommandLine.java:148)\n        at info.picocli@4.7.7/picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2469)\n        at info.picocli@4.7.7/picocli.CommandLine$RunLast.handle(CommandLine.java:2461)\n        at info.picocli@4.7.7/picocli.CommandLine$RunLast.handle(CommandLine.java:2423)\n        at info.picocli@4.7.7/picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:2277)\n        at info.picocli@4.7.7/picocli.CommandLine$RunLast.execute(CommandLine.java:2425)\n        at info.picocli@4.7.7/picocli.CommandLine.execute(CommandLine.java:2174)\n        at org.jabref.jabkit/org.jabref.JabKit.main(JabKit.java:99)\n\n> Task :jabkit:run FAILED\n\nFAILURE: Build failed with an exception.\n```\n\nThere is also another bug whenever you actually provide the output.\n\nI have fixed this in a local branch but wanted to make sure that this was in fact unintended behavior before making a PR. If someone experienced in jabkit/jabref tells me this is unintended I will make the PR.\n \n\n\n\n### Appendix\n\n<details>\n\n<summary>Bib file: Chocolate.bib</summary>\n\n```\n@Article{Corti_2009,\n  author       = {Corti, Roberto and Flammer, Andreas J. and Hollenberg, Norman K. and Lüscher, Thomas F.},\n  date         = {2009-03},\n  journaltitle = {Circulation},\n  title        = {Cocoa and Cardiovascular Health},\n  doi          = {10.1161/circulationaha.108.827022},\n  issn         = {1524-4539},\n  number       = {10},\n  pages        = {1433--1441},\n  volume       = {119},\n  publisher    = {Ovid Technologies (Wolters Kluwer Health)},\n}\n\n@Article{Cooper_2007,\n  author       = {Cooper, Karen A. and Donovan, Jennifer L. and Waterhouse, Andrew L. and Williamson, Gary},\n  date         = {2007-08},\n  journaltitle = {British Journal of Nutrition},\n  title        = {Cocoa and health: a decade of research},\n  doi          = {10.1017/s0007114507795296},\n  issn         = {1475-2662},\n  number       = {1},\n  pages        = {1--11},\n  volume       = {99},\n  publisher    = {Cambridge University Press (CUP)},\n}\n\n@Article{Ding_2006,\n  author       = {Ding, Eric L and Hutfless, Susan M and Ding, Xin and Girotra, Saket},\n  date         = {2006-01},\n  journaltitle = {Nutrition \\& Metabolism},\n  title        = {Chocolate and Prevention of Cardiovascular Disease: A Systematic Review},\n  doi          = {10.1186/1743-7075-3-2},\n  issn         = {1743-7075},\n  number       = {1},\n  volume       = {3},\n  publisher    = {Springer Science and Business Media LLC},\n}\n\n@Article{Keen_2001,\n  author       = {Keen, Carl L.},\n  date         = {2001-10},\n  journaltitle = {Journal of the American College of Nutrition},\n  title        = {Chocolate: Food as Medicine/Medicine as Food},\n  doi          = {10.1080/07315724.2001.10719181},\n  issn         = {1541-1087},\n  number       = {sup5},\n  pages        = {436S--439S},\n  volume       = {20},\n  publisher    = {Informa UK Limited},\n}\n\n@Article{Katz_2011,\n  author       = {Katz, David L. and Doughty, Kim and Ali, Ather},\n  date         = {2011-11},\n  journaltitle = {Antioxidants \\& Redox Signaling},\n  title        = {Cocoa and Chocolate in Human Health and Disease},\n  doi          = {10.1089/ars.2010.3697},\n  issn         = {1557-7716},\n  number       = {10},\n  pages        = {2779--2811},\n  volume       = {15},\n  publisher    = {Mary Ann Liebert Inc},\n  readstatus   = {skimmed},\n}\n\n@Article{Parker_2006,\n  author       = {Parker, Gordon and Parker, Isabella and Brotchie, Heather},\n  date         = {2006-06},\n  journaltitle = {Journal of Affective Disorders},\n  title        = {Mood state effects of chocolate},\n  doi          = {10.1016/j.jad.2006.02.007},\n  issn         = {0165-0327},\n  number       = {2–3},\n  pages        = {149--159},\n  volume       = {92},\n  groups       = {Used},\n  publisher    = {Elsevier BV},\n  readstatus   = {read},\n}\n\n@Article{Scholey_2013,\n  author       = {Scholey, Andrew and Owen, Lauren},\n  date         = {2013-10},\n  journaltitle = {Nutrition Reviews},\n  title        = {Effects of chocolate on cognitive function and mood: a systematic review},\n  doi          = {10.1111/nure.12065},\n  issn         = {0029-6643},\n  number       = {10},\n  pages        = {665--681},\n  volume       = {71},\n  groups       = {Used},\n  publisher    = {Oxford University Press (OUP)},\n  readstatus   = {read},\n}\n\n@Article{Tan_2021,\n  author       = {Tan, Terence Yew Chin and Lim, Xin Yi and Yeo, Julie Hsiao Hui and Lee, Shaun Wen Huey and Lai, Nai Ming},\n  date         = {2021-08},\n  journaltitle = {Nutrients},\n  title        = {The Health Effects of Chocolate and Cocoa: A Systematic Review},\n  doi          = {10.3390/nu13092909},\n  issn         = {2072-6643},\n  number       = {9},\n  pages        = {2909},\n  volume       = {13},\n  publisher    = {MDPI AG},\n  readstatus   = {skimmed},\n}\n\n@Article{Macht_2007,\n  author       = {Macht, Michael and Mueller, Jochen},\n  date         = {2007-11},\n  journaltitle = {Appetite},\n  title        = {Immediate effects of chocolate on experimentally induced mood states},\n  doi          = {10.1016/j.appet.2007.05.004},\n  issn         = {0195-6663},\n  number       = {3},\n  pages        = {667--674},\n  volume       = {49},\n  groups       = {Used},\n  publisher    = {Elsevier BV},\n  readstatus   = {read},\n}\n\n@Article{Tokede_2011,\n  author       = {Tokede, O A and Gaziano, J M and Djoussé, L},\n  date         = {2011-05},\n  journaltitle = {European Journal of Clinical Nutrition},\n  title        = {Effects of cocoa products/dark chocolate on serum lipids: a meta-analysis},\n  doi          = {10.1038/ejcn.2011.64},\n  issn         = {1476-5640},\n  number       = {8},\n  pages        = {879--886},\n  volume       = {65},\n  publisher    = {Springer Science and Business Media LLC},\n}\n\n@Article{Garcia_2018,\n  author       = {Garcia, Jose P and Santana, Adrian and Baruqui, Diego Lugo and Suraci, Nicholas},\n  date         = {2018-12},\n  journaltitle = {Reviews in Cardiovascular Medicine},\n  title        = {The Cardiovascular effects of chocolate.},\n  doi          = {10.31083/j.rcm.2018.04.3187},\n  issn         = {2153-8174},\n  number       = {4},\n  volume       = {19},\n  publisher    = {IMR Press},\n}\n\n@Article{Hooper_2012,\n  author       = {Hooper, Lee and Kay, Colin and Abdelhamid, Asmaa and Kroon, Paul A and Cohn, Jeffrey S and Rimm, Eric B and Cassidy, Aedín},\n  date         = {2012-03},\n  journaltitle = {The American Journal of Clinical Nutrition},\n  title        = {Effects of chocolate, cocoa, and flavan-3-ols on cardiovascular health: a systematic review and meta-analysis of randomized trials},\n  doi          = {10.3945/ajcn.111.023457},\n  issn         = {0002-9165},\n  number       = {3},\n  pages        = {740--751},\n  volume       = {95},\n  publisher    = {Elsevier BV},\n  readstatus   = {skimmed},\n}\n\n@Article{Di_Renzo_2012,\n  author       = {Di Renzo, Gian Carlo and Brillo, Eleonora and Romanelli, Maila and Porcaro, Giuseppina and Capanna, Federica and Kanninen, Tomi T and Gerli, Sandro and Clerici, Graziano},\n  date         = {2012-06},\n  journaltitle = {The Journal of Maternal-Fetal \\& Neonatal Medicine},\n  title        = {Potential effects of chocolate on human pregnancy: a randomized controlled trial},\n  doi          = {10.3109/14767058.2012.683085},\n  issn         = {1476-4954},\n  number       = {10},\n  pages        = {1860--1867},\n  volume       = {25},\n  groups       = {Used},\n  publisher    = {Informa UK Limited},\n  readstatus   = {read},\n}\n\n@Article{Richard_2017,\n  author       = {Richard, Anna and Meule, Adrian and Friese, Malte and Blechert, Jens},\n  date         = {2017-09},\n  journaltitle = {Frontiers in Psychology},\n  title        = {Effects of Chocolate Deprivation on Implicit and Explicit Evaluation of Chocolate in High and Low Trait Chocolate Cravers},\n  doi          = {10.3389/fpsyg.2017.01591},\n  issn         = {1664-1078},\n  volume       = {8},\n  groups       = {Used},\n  publisher    = {Frontiers Media SA},\n  readstatus   = {read},\n}\n\n@Article{Fulton_1969,\n  author       = {Fulton, James E., Jr. and Plewig, Gerd and Kligman, Albert M.},\n  date         = {1969-12},\n  journaltitle = {JAMA: The Journal of the American Medical Association},\n  title        = {{Effect of Chocolate on Acne Vulgaris}},\n  doi          = {10.1001/jama.1969.03160370055011},\n  eprint       = {https://jamanetwork.com/journals/jama/articlepdf/350738/jama\\_210\\_11\\_011.pdf},\n  issn         = {0098-7484},\n  number       = {11},\n  pages        = {2071-2074},\n  url          = {https://doi.org/10.1001/jama.1969.03160370055011},\n  volume       = {210},\n  publisher    = {American Medical Association (AMA)},\n}\n\n@Comment{jabref-meta: databaseType:biblatex;}\n\n@Comment{jabref-meta: fileDirectory:pdfs;}\n\n@Comment{jabref-meta: grouping:\n0 AllEntriesGroup:;\n1 SearchGroup:Entries without a group\\;0\\;groups !=~ .+\\;0\\;1\\;1\\;\\;\\;\\;;\n1 SearchGroup:Entries without a linked file\\;0\\;file !=~ .+\\;0\\;1\\;1\\;\\;\\;\\;;\n1 StaticGroup:Paywalled\\;0\\;1\\;\\;\\;\\;;\n1 SearchGroup:To read\\;0\\;groups !=~ .+ and readstatus !=~ .+\\;0\\;1\\;1\\;0x008080ff\\;\\;\\;;\n1 KeywordGroup:Skimmed\\;0\\;readstatus\\;skimmed\\;0\\;0\\;1\\;0xffff00ff\\;\\;\\;;\n1 KeywordGroup:Read\\;0\\;readstatus\\;read\\;0\\;0\\;0\\;0x00ff00ff\\;\\;\\;;\n1 StaticGroup:Used\\;0\\;1\\;0x0000ffff\\;\\;\\;;\n}\n\n@Comment{jabref-meta: groups-search-syntax-version:6.0-alpha_1}\n\n@Comment{jabref-meta: keypatterndefault:[auth]_[year];}\n```\n\n</details>\n",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14118,
+    "title": "Add option to use pseudonymize libraries in GUI",
+    "body": "Logic/functionality for pseudonymizing libraries [already exists](https://github.com/JabRef/jabref/blob/main/jablib/src/main/java/org/jabref/logic/pseudonymization/Pseudonymization.java). \nSupport for using it via CLI (JabKit) was added in https://github.com/JabRef/jabref/pull/13158.\nWe want to make it accessible to the UI as well.\nAdd it to the \"Tools\" menu:\n<img width=\"577\" height=\"405\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ab9cbcdc-396a-4c3a-a466-6d4634d775ea\" />\n\n(Add a new option: \"Pseudonymize library\" and wire it with the existing logic. On clicking the option, it should take input the path where the pseudonymized library (output) and keys are to be saved via a dialog, and at the end of the process there should be a new `.bib` and `.csv` files in those directories).\n\n**Additional context**\nFor better context of the inputs and outputs, see the PR description of https://github.com/JabRef/jabref/pull/13158 and try out the feature yourself first using JabKit and a bib file, such as [Chocolate.bib](https://github.com/JabRef/jabref/blob/main/jablib/src/main/resources/Chocolate.bib).\n\n> [!NOTE]\n> Since this is a **UI** change, a **screen recording** in the description of the PR adding this functionality is **mandatory** for marking completion.\n",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14115,
+    "title": "Replace Guava's Cache with Caffeine",
+    "body": "We currently use a cache from google guava.\n\nHowever, that is deprecated and should be replaced with its successor, caffeine.\nhttps://guava.dev/releases/snapshot-jre/api/docs/com/google/common/cache/CacheBuilder.html#prefer-caffeine-over-guava-s-caching-api-heading \n\n\nhttps://github.com/ben-manes/caffeine \n\nWe use it for FileAnnotationCache and CitationStyleCache\n\nhttps://github.com/JabRef/jabref/blob/main/jablib/src/main/java/org/jabref/logic/pdf/FileAnnotationCache.java \n\nhttps://github.com/JabRef/jabref/blob/7f5edd6799a47cc002b54b83982b7e42d25892db/jablib/src/main/java/org/jabref/logic/citationstyle/CitationStyleCache.java\n\n\nAdd caffeine dependency to versions and dependency-rules \nMigrate the code\nAdd a test\n",
+    "commit_messages": [],
+    "labels": [
+      "dev: performance",
+      "good first issue",
+      "📍 Assigned"
+    ]
+  },
+  {
+    "issue_id": 14103,
+    "title": "Pre-compile regex patterns",
+    "body": "<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\n**Is your suggestion for improvement related to a problem? Please describe.**\nSome classes use `String.replaceAll()` with inline regex patterns, rather than pre-compiling them as `static final Pattern` fields following [Java regex best practices](https://www.baeldung.com/java-regex-pre-compile).\n\n**Describe the solution you'd like**\nPre-compile regex patterns as `private static final Pattern` fields at the class level, following the approach already used in classes such as `LatexCleanupFormatter` and `BibliographyFromPdfImporter`.\n\nI originally identified this pattern in `EuropePmcFetcher` (date validation pattern `\"\\d{4}-\\d{2}-\\d{2}\"`), but found similar patterns in other files:\n- [ ] `EuropePmcFetcher` - date validation pattern\n- [ ] `BstPreviewLayout` -  in `generatePreview()`\n- [ ] `HtmlToUnicodeFormatter` - HTML tag removal pattern\n- [ ] `JstorFetcher` - URL query pattern\n\n\n**Additional context**\nI posted about the initial `EuropePmcFetcher` change on Gitter and Christoph said it was a positive change. Would you prefer one PR for `EuropePmcFetcher` or could I address the regex pre-compiling in the other files listed as well?",
+    "commit_messages": [],
+    "labels": [
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14089,
+    "title": "URLDownload should include httpResponse in exception",
+    "body": "`FetcherException` supports outputting http information on failure: `org.jabref.logic.importer.FetcherException#getLocalizedMessage`\n\nThis should be used at `URLDownload` (e.g., `org.jabref.logic.net.URLDownload#asString(java.nio.charset.Charset, java.net.URLConnection)`)\n\nTask:\n\n1. Adapt org.jabref.logic.importer.fetcher.DoiFetcher#performSearchById to use `org.jabref.logic.importer.fileformat.BibtexParser#parseEntries` instead of `singleFromString`\n1. Make `asString(Charset encoding, URLConnection connection)` private\n2. Adapt all other methods\n\nNote: You can merge `asString(Charset encoding, URLConnection connection)` with `asString(URLConnection connection)` probably.",
+    "commit_messages": [
+      "Fix issue #14089 URLDownload should include httpResponse in exception",
+      "Fix issue #14089 URLDownload should include httpResponse in exception",
+      "Fix issue #14089 URLDownload should include httpResponse in exception",
+      "Update: Format fix for issue #14089"
+    ],
+    "labels": [
+      "component: fetcher",
+      "good first issue"
+    ]
+  },
+  {
+    "issue_id": 14088,
+    "title": "Prevent custom entry types with spaces",
+    "body": "BibTeX has problems when the entry type contains spaces. JabRef should not allow custom entry types to contain spaces.\n\nAdapt the validator:\nhttps://github.com/JabRef/jabref/blob/4d2fd15fe244fed17bb6eb31c8dc958f2e4a265c/jabgui/src/main/java/org/jabref/gui/preferences/customentrytypes/CustomEntryTypesTabViewModel.java#L72-L75\n\nTriggered by this post.\nhttps://discourse.jabref.org/t/export-list-of-import-errors/3649/10 \n\n---\n\nBackground: one can customize entry types at\n\n<img width=\"1149\" height=\"792\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/6e9c7bec-5615-44f0-b05e-402d661f0e24\" />\n",
+    "commit_messages": [
+      "#14088 prevent custom entry types with spaces",
+      "#14088 update changelog",
+      "#14088 resolve LocalizationConsistencyTest",
+      "Prevent spaces in custom entry (#14091)\n\n* #14088 prevent custom entry types with spaces\n\n* #14088 update changelog\n\n* #14088 resolve LocalizationConsistencyTest\n\n* try rerun automated tests\n\n* remove trailing",
+      "Prevent spaces in custom entry (#14091)\n\n* #14088 prevent custom entry types with spaces\n\n* #14088 update changelog\n\n* #14088 resolve LocalizationConsistencyTest\n\n* try rerun automated tests\n\n* remove trailing"
+    ],
+    "labels": [
+      "component: ui",
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "size: small"
+    ]
+  },
+  {
+    "issue_id": 14087,
+    "title": "Support combo box in main table (for content selectors)",
+    "body": "1. Create a new library \"demo.bib\"\n6. Add new entry\n7. In \"BibTeX source\", add `icore = {abc}`\n    ```bibtex\n    @Article{demo,\n    icore = {abc}\n    }\n    ```\n2. Library properties\n3. Add \"Content selectors\" for `ICORE`    <img width=\"577\" height=\"417\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b70e3a32-e62f-4584-99b2-dad033b8c51a\" />\n3. File > Preferences > Entry table\n4. Add custom column \"ICORE\"\\\n    <img width=\"588\" height=\"397\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/647cd4ad-e255-4453-bf8d-c46f9d5dba02\" />\n\n5. Save, restart JabRef\n\nSee at tab \"Other fields\", there is are the contents displayed\n\n<img width=\"639\" height=\"377\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d208752c-b0d8-43a6-a2d5-d5cbd5543505\" />\n\nHowever, clicking on the field on the main table does not do anything:\n\n<img width=\"645\" height=\"202\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b949eb3a-7780-4fff-a072-36cee28087f0\" />\n\nThere is something done for the viewed field:\n\n<img width=\"412\" height=\"226\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/7f345e38-4611-4082-9e17-b77c939e08f8\" />\n\n---\n\nTask: Similar behavior should happen for fields with a content selector.\n\nHints:\n\n1. Possible field values can be read from `databaseContext.getMetaData().getContentSelectorValuesForField(field)`\n1. Adapt `org.jabref.gui.maintable.MainTableColumnFactory#createColumn` to handle the case if the are content selector values and display them \n2.  `org.jabref.gui.maintable.columns.ContentSelectorColumn` similar to `org.jabref.gui.maintable.columns.SpecialFieldColumn#SpecialFieldColumn` (but more easy - just use OptionalValueTableCellFactory`",
+    "commit_messages": [],
+    "labels": [
+      "component: maintable",
+      "📍 Assigned",
+      "📌 Pinned",
+      "good second issue",
+      "🔔 reminder-sent",
+      "size: medium"
+    ]
+  },
+  {
+    "issue_id": 14086,
+    "title": "Support NO_COLOR environment variable",
+    "body": "There should be the possibility to have output with no color - see https://no-color.org/ (variable `NO_COLOR=1`)\n\nSwitch CLI output if colors are used to https://github.com/darvil82/java-terminal-text-formatter  (that library supports `NO_COLOR` out of the box)\n\nCheck and modify all CLI projects (i.e.,, `jabls-cli`, `jabsrv-cli` ,`jabkit`)\n\n---\n\nBackground\n\n<img width=\"1231\" height=\"560\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/257c72c7-9e32-483b-bbf1-efeea4263a15\" />\n\n---\n\nHints: \n\nNeed to modify: org.jabref.logic.util.BuildInfo#JABREF_BANNER - check for its use etc.\n\n---\n\nFollow-up for maintainers: We can list us at https://no-color.org/\n",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14083,
+    "title": "Web Search: Enable search by letter",
+    "body": "On the left side, JabRef offers Web search (Activate using View -> Web Search).\n\n<img width=\"288\" height=\"330\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/076b0ba2-534a-40c7-98d5-bcb3b5206b71\" />\n\nWhen I press \"L\" in the search field, \"LOBID\" should be selected.\n\nRequirement: Enable search.\n\nCode hint: Should be same changes as https://github.com/JabRef/jabref/pull/14031\n\n---\n\nAdditionally: Go through the preferences dialog (File >Preferences) and for each ComboBox with fixed values, replace it.\n\nExample:\n\n<img width=\"763\" height=\"435\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/04fc1866-dad4-4cb1-bb93-960985855548\" />\n\n---\n\nNOTE\n\nFollowing is a combo box allowing free text - this should NOT be replaced (because users should still be able to key in values)\n\n<img width=\"1114\" height=\"780\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/4bbdc597-cdb5-4a7e-bf7a-43e3140a6708\" />",
+    "commit_messages": [
+      "Convert fixed-value ComboBoxes to SearchableComboBox (#14083)"
+    ],
+    "labels": [
+      "component: ui",
+      "component: preferences",
+      "good first issue",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 14082,
+    "title": "Change combo box for field selection to two",
+    "body": "The combo box to select a field is non-searchable (Because it allows free text)\n\nChange it to TWO elements stacked on each other\n\n1. Searchable ComboBox\n2. Free text field\n\nBoth with a plus sign to add (for the existing combo box, this already exsists)\n\n<img width=\"1136\" height=\"776\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/11797664-8e53-496a-b429-84b1a009d13b\" />\n\nCode hint: Should be same changes as https://github.com/JabRef/jabref/pull/14031",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "🔔 reminder-sent"
+    ]
+  },
+  {
+    "issue_id": 14058,
+    "title": "Fix alphabetical ordering in dropdown.",
+    "body": "1. Start JabRef\n2. Open preferences\n3. Go to \"External programs\"\n4. Open dropddown \"Applications to push entries to\"\n5. See that \"TeXShop\" and \"VScode\" is are not sorted alphabetically\n\n\n<img width=\"366\" height=\"387\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/ee03dce5-aaea-4fbb-95ef-7b25d04295d2\" />\n\nSort them alphabetically.\n",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "component: external-application-integration"
+    ]
+  },
+  {
+    "issue_id": 14055,
+    "title": "Truncated text on buttons is unreadable",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nopenSUSE Tumbleweed\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. View entries in the possible duplicates dialog\n2. Text does not fit on the buttons, so the text is truncated and cannot be read, because the buttons also do not have a tooltip.\n\nOther dialogs also have this problem. This example (possible duplicates) is particularly troublesome because the button-text cannot be discerned by process of elimination (unlike when there are only two choices and one of them is \"cancel\").\n\n![Image](https://github.com/user-attachments/assets/2c64b8ae-94b0-41f8-8abe-a7435b1d6e1f)\n\n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
+    "labels": [
+      "component: ui"
+    ]
+  },
+  {
+    "issue_id": 14052,
+    "title": "Package and Class name collision accross modules",
+    "body": "**Is your suggestion for improvement related to a problem? Please describe.**\n\nI observe at least one package and even class name collision between two JabRef Modules:\n\n`org.jabref.cli.ArgumentProcessor` exists in jabgui and jabkit and both classes are quite different. They have completely different members, so this is more than just a shadowing hack.\nWhile technically possible, already the package name clash is bad style. So-called split packages are discouraged in the Java module system and can cause unforeseen issues.\n\nFrom https://dev.java/learn/modules/intro/:\n\n> Packages should have a unique origin, so no two modules can contain types in the same package. If they do, this is called a split package, and the module system will refuse to compile or launch such configurations.\n\n**Describe the solution you'd like**\nPlease refactor to avoid split packages as it is an unnecessary risk and source of trouble. The earlier this is done, the easier the change will be. I strongly recommend to adjust this before beta phase.\n",
+    "commit_messages": [
+      "Fix package and class name collision across modules (#14052)\n\n- Rename jabkit ArgumentProcessor to JabKitArgumentProcessor\n- Rename jabgui ArgumentProcessor to GuiArgumentProcessor\n- Update all import statements and references\n- Update constructor calls and instantiations\n- Update CLI command classes to use new class names\n- Rename test files accordingly\n\nThis resolves the split package issue where both modules had\nclasses with identical names in the same package, which violates\nJava module system best practices.",
+      "Fix package and class name collision across modules (#14052)\n\n- Rename jabkit ArgumentProcessor to JabKitArgumentProcessor\n- Rename jabgui ArgumentProcessor to GuiArgumentProcessor\n- Update all import statements and references\n- Update constructor calls and instantiations\n- Update CLI command classes to use new class names\n- Rename test files accordingly\n\nThis resolves the split package issue where both modules had\nclasses with identical names in the same package, which violates\nJava module system best practices."
+    ],
+    "labels": [
+      "dev: code-quality",
+      "📌 Pinned",
+      "good second issue"
+    ]
+  },
+  {
+    "issue_id": 14034,
+    "title": "Missing io.github.adr:e-adr:2.0.0-SNAPSHOT dependency (*failed to build)",
+    "body": "### JabRef version\n\n5.15 (latest release)\n\n### Operating system\n\nWindows\n\n### Details on version and operating system\n\nWindows 11 Home\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. git clone jabref URL (main branch)\n2.  in command line run ./gradlew build\n3. .See output.\n\n./gradlew build\nDownloading https://files.jabref.org/gradle-9.3.0-jabref-1-bin.zip\n.............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%\n\nWelcome to Gradle 9.3.0-20250928220000+0000!\n\nStarting a Gradle Daemon (subsequent builds will be faster)\n\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nCould not determine the dependencies of task ':jabgui:distTar'.\n> Could not resolve all dependencies for configuration ':jabgui:runtimeClasspath'.\n   > Could not find io.github.adr:e-adr:2.0.0-SNAPSHOT.\n\n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nPaste an excerpt of your log file here\n```\n\n</details>\n",
+    "commit_messages": [],
+    "labels": [
+      "dev: build-system"
+    ]
+  },
+  {
+    "issue_id": 14017,
+    "title": "Put sort items in \"group\" menu into sub-menu",
+    "body": "Move \"Sort ...\" entries in the groups panel to sub menu \"Sort. ..\"\n\n<img width=\"1289\" height=\"915\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/d84e583b-0ed4-456c-a177-d8d12d863ea8\" />",
+    "commit_messages": [],
+    "labels": [
+      "component: ui",
+      "component: groups",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "🔔 reminder-sent",
+      "size: small"
+    ]
+  },
+  {
+    "issue_id": 14016,
+    "title": "Rewrite `org.jabref.logic.importer.fetcher.CustomizableKeyFetcher#getTestUrl` to be a pattern",
+    "body": "Currently, the assumption of `org.jabref.logic.importer.fetcher.CustomizableKeyFetcher#getTestUrl` is that the API key is appended.\n\nIt is appended at `org.jabref.gui.preferences.websearch.WebSearchTabViewModel#checkCustomApiKey` and then some fetch is done.\n\nThis does not work if the API key is used otherwise.\n\nTask\n\n1. Replace `default String getTestUrl()` by `boolean isValidKey(String apiKey`.\n    - Instead of `checkCustomApiKey`  testing for the key, the fetcher itself does the test\n    - No default implementaiton - all fetchers need to implement - stub: `return true` with a TODO that it needs to be implemented\n2. Remove the tests `baseURLConstruction` etc from `org.jabref.logic.importer.fetcher.BiodiversityLibraryTest`\n3. Implement `checkCustomApiKey` for `org.jabref.logic.importer.fetcher.BiodiversityLibrary` based on the existing idea. -- You can move code from `WebSearchTabViewModel#checkCustomApiKey` to here\n4. Adapt `WebSearchTabViewModel#checkCustomApiKey` to use the new interface\n5. Adapt `org.jabref.logic.importer.fetcher.IEEE` to test for api key - add new `private` `getURLForQuery` accepting an API key - and have the existing `getURLForQuery` make use of it - Use `\"JabRef API key test\"` as search (look at the code on how to construct a lucene query)",
+    "commit_messages": [],
+    "labels": [
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned",
+      "size: medium"
+    ]
+  },
+  {
+    "issue_id": 13984,
+    "title": "Unintentional reset of search query during manipulation of found entries.",
+    "body": "When you perform a search, a list of found entries is displayed. After **deleting** an entry from the list, the search query is completely reset to the main window displaying the entries before the search, even though the search query is still entered in the search bar. Therefore, to display the search query, you must clear the search bar again and re-enter the same query. This issue wasn't previously present; it arose relatively recently.\n\nIf the list resulting from a search query is manipulated in any way, the search query should not be reset and the resulting list should remain until the search query is removed or modified!\n",
+    "commit_messages": [],
+    "labels": [
+      "component: search",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 13978,
+    "title": "Duplicated entry removed from main table when merged",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nGNU / Linux\n\n### Details on version and operating system\n\nArch Linux, bspwm, X11\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. Create a new library.\n2. Import a new article by ID (e.g. <https://arxiv.org/abs/2405.02318>).\n3. Then, import the same article again.\n4. Then a merge dialog will be opened, because the new entry duplicates the one already present (this is expected behavior).\n5. Click on \"Treat all duplicates the same way\".\n6. Click on \"Keep merged\".\n\nAs the result, main table no longer has the entry and it's empty. However, the source contains the entry, and if you reopen it, it will be seen\n\n### Appendix\n\n_No response_",
+    "commit_messages": [],
+    "labels": [
+      "component: maintable",
+      "good first issue",
+      "component: duplicate-finder",
+      "component: merge"
+    ]
+  },
+  {
+    "issue_id": 13964,
+    "title": "Issue 676",
+    "body": "Implementation of homework assignment 2",
+    "commit_messages": [],
+    "labels": []
+  },
+  {
+    "issue_id": 13940,
+    "title": "Add a fetcher for OpenAlex",
+    "body": "\n<!--\nPlease use the GitHub issue tracker only for bug reports and smaller suggestions for improvements.\nRequests for completely new features, questions and general feedback is now handled at https://discourse.jabref.org.\nThanks!\n-->\n\nOpenAlex is a large open catalog to the global research system \nhttps://openalex.org\n\nImplement a fetcher for OpenAlex using the SearchBasedFetcher/SearchBasedParserFetcher interfaces\nAPI docs for searching and filtering:\nhttps://docs.openalex.org/api-entities/works/filter-works\nhttps://docs.openalex.org/api-entities/works/search-works \n\nYou need to implement a parser to parse the JSON result to Bibtex.\n\nOptionally, implement full-text fetcher capabilities. ",
+    "commit_messages": [],
+    "labels": [
+      "component: fetcher",
+      "📍 Assigned",
+      "📌 Pinned",
+      "good second issue"
+    ]
+  },
+  {
+    "issue_id": 13930,
+    "title": "Test concrete patterns in BracketedPatternTest",
+    "body": "There is a comment in CitationKeyGeneratorTest:\n\n> The concrete patterns such as <code>authorsAlpha</code> should better be tested at {@link BracketedPatternTest}.\n\nI had been working on this in a [PR](https://github.com/JabRef/jabref/pull/13625) for another issue (https://github.com/JabRef/jabref-koppor/issues/676) but think it should be separate. This could be a good second issue or for a university class.",
+    "commit_messages": [],
+    "labels": [
+      "dev: code-quality",
+      "📍 Assigned",
+      "📌 Pinned",
+      "good second issue"
+    ]
+  },
+  {
+    "issue_id": 13929,
+    "title": "Make \"Configure API key\" discoverable when searching preferences",
+    "body": "<img width=\"600\" alt=\"JabRef preferences showing configurable API keys\" src=\"https://github.com/user-attachments/assets/ce918c7f-d384-44d3-848c-3674f854452b\" />\n\nAPI keys can be configured in Web search, but the search box doesn't match this tab.\n\n<img width=\"200\" alt=\"JabRef preferences showing search for API and results matching the AI tab.\" src=\"https://github.com/user-attachments/assets/d94cce1c-fa76-4ca7-b7c7-7f0eb21a6862\" />\n\nSearching for \"API\" only matches the AI tab\n\n<img width=\"200\" alt=\"JabRef preferences showing search for key and results matching several tabs, no including the web search tab.\" src=\"https://github.com/user-attachments/assets/12d3666d-207d-4919-998d-4b688d662e95\" />\n\nSearching for \"key\" matches several tabs, but Web search is not one of them.\n\nThe API keys would be easier to locate if searching in preferences matched the Web search tab as well as the AI tab.",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences",
+      "good first issue",
+      "📍 Assigned",
+      "📌 Pinned"
+    ]
+  },
+  {
+    "issue_id": 13898,
+    "title": "Linux: JabRef fails to start",
+    "body": "### JabRef version\n\nLatest development branch build (please note build date below)\n\n### Operating system\n\nOther (please describe below)\n\n### Details on version and operating system\n\nFedora Linux 42\n\n### Checked with the latest development build (copy version output from About dialog)\n\n- [x] I made a backup of my libraries before testing the latest development version.\n- [x] I have tested the latest development version and the problem persists\n\n### Steps to reproduce the behaviour\n\n1. download rpm of current development built.\n2. try to start from shell.\n\neffect: software does not start.\n\n---\n\nplease do shared guiding questions for investigating ;)\n\n### Appendix\n\n...\n<details>\n\n<summary>Log File</summary>\n\n```\nWARNING: Using incubator modules: jdk.incubator.vector\nException in thread \"main\" java.lang.NullPointerException: Cannot invoke \"java.util.Set.equals(Object)\" because \"currentGeneralPrefs\" is null\n\tat org.jabref/org.jabref.migrations.PreferencesMigrations.addICORERankingFieldToGeneralTab(PreferencesMigrations.java:590)\n\tat org.jabref/org.jabref.migrations.PreferencesMigrations.runMigrations(PreferencesMigrations.java:72)\n\tat org.jabref/org.jabref.Launcher.main(Launcher.java:90)\n```\n\n</details>\n",
+    "commit_messages": [],
+    "labels": [
+      "component: preferences"
     ]
   }
 ]

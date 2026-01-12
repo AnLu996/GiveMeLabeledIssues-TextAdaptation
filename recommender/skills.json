@@ -1,0 +1,12 @@
+{
+  "python": ["python", "pip", "venv", "pytest", "typing", "pandas", "numpy"],
+  "nlp": ["nlp", "bert", "transformer", "token", "tf-idf", "vectorizer", "embedding"],
+  "ml": ["model", "train", "baseline", "random forest", "classifier", "precision", "recall", "f1"],
+  "data": ["csv", "dataset", "corpus", "preprocess", "cleaning", "label", "multilabel"],
+  "git": ["git", "github", "pull request", "pr", "merge", "branch", "commit"],
+  "backend": ["api", "endpoint", "server", "flask", "django", "fastapi", "http"],
+  "testing": ["test", "pytest", "unittest", "coverage", "assert"],
+  "docs": ["readme", "documentation", "doc", "docs", "tutorial", "guide"],
+  "frontend": ["ui", "frontend", "react", "vue", "css", "html", "javascript"],
+  "devops": ["docker", "ci", "github actions", "deploy", "pipeline", "linux"]
+}

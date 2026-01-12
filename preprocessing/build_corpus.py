@@ -27,43 +27,55 @@ MIN_LABEL_FREQ = 5  # recomendado para ~100 issues (multilabel)
 
 def map_labels_to_groups(labels):
     """
-    Mapea labels de GitHub a categorías semánticas útiles
-    conservando información de componentes y áreas.
+    Mapea labels de GitHub a 6 categorías principales para reducir sparsity.
+    
+    Categorías:
+    1. UI_CORE: UI general (ui, maintable, groups, welcome, preview)
+    2. UI_EDITORS: Edición/Config (entry-editor, preferences, consistency)
+    3. LOGIC_DATA: Lógica interna (model, logic, import, export, search)
+    4. EXTERNAL: Red/Web (fetcher, web-search, doi, citations)
+    5. QUALITY: Calidad (tests, refactoring, quality)
+    6. SYSTEM: Sistema (build, cli, os)
     """
     groups = set()
+
+    # Mapeo directo de keywords a categorías
+    CATEGORY_MAP = {
+        "UI_CORE": ["ui", "maintable", "groups", "welcome-tab", "entry-preview"],
+        "UI_EDITORS": ["entry-editor", "preferences", "consistency-check"],
+        "LOGIC_DATA": ["model", "logic", "import", "export", "search"],
+        "EXTERNAL": ["fetcher", "web-search", "doi", "citation-relations"],
+        "QUALITY": ["code-quality", "refactoring", "tests"],
+        "SYSTEM": ["build-system", "jabkit", "os:", "cli"]
+    }
 
     for label in labels:
         label = label.strip().lower()
 
-        # ------------------------
-        # PRIORIDAD
-        # ------------------------
-        if label in ["📌 pinned", "📍 assigned"]:
-            groups.add("PRIORITY")
+        # Ignorar etiquetas meta que no son dominio
+        if label in ["📌 pinned", "📍 assigned", "good first issue", "newcomer", "priority"]:
+            continue
 
-        # ------------------------
-        # COMPONENTES
-        # component: preferences → preferences
-        # ------------------------
-        elif label.startswith("component:"):
-            component = label.split("component:", 1)[1].strip()
-            if component:
-                groups.add(component)
+        # Normalizar prefijos comunes
+        clean_label = label
+        if clean_label.startswith("component:"):
+            clean_label = clean_label.split("component:", 1)[1].strip()
+        elif clean_label.startswith("dev:"):
+            clean_label = clean_label.split("dev:", 1)[1].strip()
 
-        # ------------------------
-        # DEV / ÁREAS TÉCNICAS
-        # dev: ci-cd → ci-cd
-        # ------------------------
-        elif label.startswith("dev:"):
-            dev_area = label.split("dev:", 1)[1].strip()
-            if dev_area:
-                groups.add(dev_area)
-
-        # ------------------------
-        # NEWCOMER
-        # ------------------------
-        elif label.startswith("good "):
-            groups.add("NEWCOMER")
+        # Buscar match en categorías
+        found_category = False
+        for category, keywords in CATEGORY_MAP.items():
+            for keyword in keywords:
+                if keyword in clean_label:
+                    groups.add(category)
+                    found_category = True
+                    break
+            if found_category:
+                break
+        
+        # Opcional: Si no matchea nada, ¿qué hacemos? 
+        # Por ahora lo ignoramos para reducir ruido ("garbage collection of labels")
 
     return sorted(groups)
 

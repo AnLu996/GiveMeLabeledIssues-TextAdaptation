@@ -9,6 +9,7 @@ import json
 import csv
 import os
 import re
+from collections import Counter
 
 # ============================================
 # 📌 RUTAS ABSOLUTAS BASADAS EN LA RAÍZ DEL PROYECTO
@@ -19,6 +20,47 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INPUT_FILE = os.path.join(BASE_DIR, "data", "raw", "issues_raw.json")
 OUTPUT_FILE = os.path.join(BASE_DIR, "data", "processed", "corpus.csv")
 
+# ============================================
+# ✅ FILTRO DE ETIQUETAS RARAS
+# ============================================
+MIN_LABEL_FREQ = 5  # recomendado para ~100 issues (multilabel)
+
+def map_labels_to_groups(labels):
+    """
+    Agrupa labels de GitHub a categorías más útiles para backlog grooming.
+    labels: lista de strings (labels originales)
+    return: lista de categorías (strings)
+    """
+    labels_set = set(labels)
+    groups = set()
+
+    # PRIORIDAD / URGENCIA
+    if "📌 Pinned" in labels_set or "📍 Assigned" in labels_set:
+        groups.add("PRIORITY")
+
+    # ONBOARDING / TAREAS PARA NUEVOS
+    if any(l.startswith("good ") for l in labels_set):
+        # más estricto si quieres:
+        # if any(l in labels_set for l in ["good first issue","good second issue","good third issue"]):
+        groups.add("NEWCOMER")
+
+    # AGRUPACIÓN POR COMPONENTES
+    if any(l.startswith("component:") for l in labels_set):
+        groups.add("COMPONENT")
+
+    # AGRUPACIÓN DE TAREAS DE DEV / MANTENIMIENTO
+    if any(l.startswith("dev:") for l in labels_set):
+        groups.add("DEVELOPMENT")
+
+    # TAMAÑO
+    #if any(l.startswith("size:") for l in labels_set):
+    #    groups.add("SIZE")
+
+    # ESTADO / BLOQUEOS
+    #if any(l.startswith("status:") for l in labels_set):
+    #    groups.add("STATUS")
+
+    return sorted(groups)
 
 def clean_text(text):
     """
@@ -51,7 +93,8 @@ def build_corpus():
     2. Combina título + cuerpo de cada issue
     3. Limpia el texto
     4. Extrae labels
-    5. Guarda en corpus.csv
+    5. (NUEVO) Filtra labels raras por frecuencia global
+    6. Guarda en corpus.csv
     """
     print("\n" + "="*80)
     print("🔄 PREPROCESANDO DATASET: JSON → CSV")
@@ -84,7 +127,7 @@ def build_corpus():
     os.makedirs(output_dir, exist_ok=True)
     print(f"[OK] Directorio de salida listo: {output_dir}\n")
     
-    # Procesar issues
+    # Procesar issues (primera pasada)
     print("[PASO 2/4] Procesando issues (limpieza de texto y extracción de labels)...")
     print("-" * 80)
     
@@ -114,15 +157,17 @@ def build_corpus():
             labels = []
             issues_without_labels += 1
         
-        # Convertir labels a string separado por ';'
-        labels_str = ";".join(str(label) for label in labels if label)
         total_labels += len(labels)
-        
+
+        raw_labels = [str(label) for label in labels if label]
+        grouped_labels = map_labels_to_groups(raw_labels)
+
         processed_issues.append({
             "issue_id": issue.get("issue_id", idx),
             "text": cleaned_text,
-            "labels": labels_str
+            "labels_list": grouped_labels
         })
+
         
         # Mostrar progreso cada 10 issues
         if idx % 10 == 0:
@@ -132,11 +177,46 @@ def build_corpus():
     print(f"   - Issues procesados exitosamente: {len(processed_issues)}")
     print(f"   - Issues sin texto válido: {issues_without_text}")
     print(f"   - Issues sin labels: {issues_without_labels}")
-    print(f"   - Total de labels encontrados: {total_labels}")
+    print(f"   - Total de labels encontrados (antes de filtrar): {total_labels}")
     
     if len(processed_issues) == 0:
         raise ValueError("❌ No se pudo procesar ningún issue. Verifica los datos de entrada.")
     
+    # ============================================
+    # ✅ NUEVO: FILTRAR LABELS RARAS POR FRECUENCIA
+    # ============================================
+    print(f"\n[INFO] Filtrando etiquetas raras (frecuencia mínima = {MIN_LABEL_FREQ})...")
+    all_labels = []
+    for item in processed_issues:
+        all_labels.extend(item["labels_list"])
+
+    label_counter = Counter(all_labels)
+    valid_labels = {lbl for lbl, c in label_counter.items() if c >= MIN_LABEL_FREQ}
+
+    print(f"[INFO] Labels antes del filtrado: {len(label_counter)}")
+    print(f"[INFO] Labels después del filtrado: {len(valid_labels)}")
+
+    # Aplicar filtro a cada issue
+    filtered_issues = []
+    filtered_total_labels = 0
+    issues_left_without_labels = 0
+
+    for item in processed_issues:
+        filtered_labels = [lbl for lbl in item["labels_list"] if lbl in valid_labels]
+        if not filtered_labels:
+            issues_left_without_labels += 1
+
+        filtered_total_labels += len(filtered_labels)
+
+        filtered_issues.append({
+            "issue_id": item["issue_id"],
+            "text": item["text"],
+            "labels": ";".join(filtered_labels)  # ya en formato final
+        })
+
+    print(f"[OK] Total de labels después del filtrado: {filtered_total_labels}")
+    print(f"[INFO] Issues que quedaron sin labels tras filtrado: {issues_left_without_labels}/{len(filtered_issues)}")
+
     # Guardar corpus
     print(f"\n[PASO 3/4] Guardando corpus en CSV...")
     print("-" * 80)
@@ -146,7 +226,7 @@ def build_corpus():
             writer = csv.writer(f)
             writer.writerow(["issue_id", "text", "labels"])
             
-            for issue in processed_issues:
+            for issue in filtered_issues:
                 writer.writerow([
                     issue["issue_id"],
                     issue["text"],
@@ -162,32 +242,31 @@ def build_corpus():
     print("-" * 80)
     
     # Calcular estadísticas de texto
-    text_lengths = [len(issue["text"]) for issue in processed_issues]
+    text_lengths = [len(issue["text"]) for issue in filtered_issues]
     avg_text_length = sum(text_lengths) / len(text_lengths) if text_lengths else 0
     
     # Calcular estadísticas de labels
     label_counts = [len(issue["labels"].split(";")) if issue["labels"] else 0 
-                    for issue in processed_issues]
+                    for issue in filtered_issues]
     avg_labels = sum(label_counts) / len(label_counts) if label_counts else 0
     
-    # Contar labels únicos
-    all_labels = []
-    for issue in processed_issues:
+    # Contar labels únicos (después del filtrado)
+    all_labels_after = []
+    for issue in filtered_issues:
         if issue["labels"]:
-            all_labels.extend(issue["labels"].split(";"))
-    unique_labels = len(set(all_labels))
+            all_labels_after.extend(issue["labels"].split(";"))
+    unique_labels_after = len(set(all_labels_after))
     
-    print(f"   - Total de issues en corpus: {len(processed_issues)}")
+    print(f"   - Total de issues en corpus: {len(filtered_issues)}")
     print(f"   - Longitud promedio de texto: {avg_text_length:.0f} caracteres")
     print(f"   - Promedio de labels por issue: {avg_labels:.2f}")
-    print(f"   - Labels únicos encontrados: {unique_labels}")
+    print(f"   - Labels únicos encontrados (después de filtrar): {unique_labels_after}")
     
     # Mostrar algunos labels más frecuentes
-    if all_labels:
-        from collections import Counter
-        label_freq = Counter(all_labels)
-        top_labels = label_freq.most_common(5)
-        print(f"\n   Top 5 labels más frecuentes:")
+    if all_labels_after:
+        label_freq = Counter(all_labels_after)
+        top_labels = label_freq.most_common(10)
+        print(f"\n   Top 10 labels más frecuentes (después de filtrar):")
         for label, count in top_labels:
             print(f"     - {label}: {count} veces")
     

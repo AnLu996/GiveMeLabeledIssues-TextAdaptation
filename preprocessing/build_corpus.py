@@ -163,9 +163,30 @@ def build_corpus():
     
     for idx, issue in enumerate(issues, 1):
         # Extraer y combinar texto
+        # Extraer texto principal del issue
         title = issue.get("title", "") or ""
         body = issue.get("body", "") or ""
-        text = f"{title} {body}".strip()
+
+        # Extraer comentarios (si existen)
+        comments = issue.get("comments", [])
+        if isinstance(comments, list):
+            comments_text = " ".join(
+                c.get("body", "") if isinstance(c, dict) else str(c)
+                for c in comments
+            )
+        else:
+            comments_text = ""
+
+        # Extraer mensajes de commits (si existen)
+        commit_msgs = issue.get("commit_messages", [])
+        if isinstance(commit_msgs, list):
+            commits_text = " ".join(str(m) for m in commit_msgs)
+        else:
+            commits_text = ""
+
+        # Combinar todas las fuentes textuales
+        text = " ".join([title, body, comments_text, commits_text]).strip()
+
         
         # Limpiar texto
         cleaned_text = clean_text(text)

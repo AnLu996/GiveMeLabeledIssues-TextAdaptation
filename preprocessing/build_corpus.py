@@ -27,40 +27,46 @@ MIN_LABEL_FREQ = 5  # recomendado para ~100 issues (multilabel)
 
 def map_labels_to_groups(labels):
     """
-    Agrupa labels de GitHub a categorías más útiles para backlog grooming.
-    labels: lista de strings (labels originales)
-    return: lista de categorías (strings)
+    Mapea labels de GitHub a categorías semánticas útiles
+    conservando información de componentes y áreas.
     """
-    labels_set = set(labels)
     groups = set()
 
-    # PRIORIDAD / URGENCIA
-    if "📌 Pinned" in labels_set or "📍 Assigned" in labels_set:
-        groups.add("PRIORITY")
+    for label in labels:
+        label = label.strip().lower()
 
-    # ONBOARDING / TAREAS PARA NUEVOS
-    if any(l.startswith("good ") for l in labels_set):
-        # más estricto si quieres:
-        # if any(l in labels_set for l in ["good first issue","good second issue","good third issue"]):
-        groups.add("NEWCOMER")
+        # ------------------------
+        # PRIORIDAD
+        # ------------------------
+        if label in ["📌 pinned", "📍 assigned"]:
+            groups.add("PRIORITY")
 
-    # AGRUPACIÓN POR COMPONENTES
-    if any(l.startswith("component:") for l in labels_set):
-        groups.add("COMPONENT")
+        # ------------------------
+        # COMPONENTES
+        # component: preferences → preferences
+        # ------------------------
+        elif label.startswith("component:"):
+            component = label.split("component:", 1)[1].strip()
+            if component:
+                groups.add(component)
 
-    # AGRUPACIÓN DE TAREAS DE DEV / MANTENIMIENTO
-    if any(l.startswith("dev:") for l in labels_set):
-        groups.add("DEVELOPMENT")
+        # ------------------------
+        # DEV / ÁREAS TÉCNICAS
+        # dev: ci-cd → ci-cd
+        # ------------------------
+        elif label.startswith("dev:"):
+            dev_area = label.split("dev:", 1)[1].strip()
+            if dev_area:
+                groups.add(dev_area)
 
-    # TAMAÑO
-    #if any(l.startswith("size:") for l in labels_set):
-    #    groups.add("SIZE")
-
-    # ESTADO / BLOQUEOS
-    #if any(l.startswith("status:") for l in labels_set):
-    #    groups.add("STATUS")
+        # ------------------------
+        # NEWCOMER
+        # ------------------------
+        elif label.startswith("good "):
+            groups.add("NEWCOMER")
 
     return sorted(groups)
+
 
 def clean_text(text):
     """

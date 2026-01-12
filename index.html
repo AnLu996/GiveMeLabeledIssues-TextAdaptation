@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3a58d8;
+        }
+
+        .issue {
+            background: #fafafa;
+            border-left: 4px solid #4a6cf7;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .labels {
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Issue Classifier</h1>
+
+<div class="box">
+
+    <!-- SELECCIÓN DE ÁREA -->
+    <div class="section">
+        <label>Selecciona un área (solo una):</label>
+        <select id="labels" size="8"></select>
+    </div>
+
+    <!-- TEXTO DE BÚSQUEDA -->
+    <div class="section">
+        <label>Búsqueda por texto (opcional):</label>
+        <input id="query" type="text" placeholder="Ej: crash, error, performance...">
+    </div>
+
+    <!-- MODO -->
+    <div class="section">
+        <label>Modo de filtrado:</label>
+        <select id="mode">
+            <option value="or">OR (cualquiera)</option>
+            <option value="and">AND (todos)</option>
+        </select>
+    </div>
+
+    <!-- BOTÓN -->
+    <button id="searchBtn">Consultar</button>
+
+    <hr>
+
+    <!-- RESULTADOS -->
+    <div id="results"></div>
+
+</div>
+<script>
+const API = "http://127.0.0.1:5000";
+
+/* ===============================
+   CARGAR LISTA DE BÚSQUEDA
+================================ */
+fetch(`${API}/available_queries`)
+    .then(res => res.json())
+    .then(data => {
+        const select = document.getElementById("labels");
+        data.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item;
+            option.textContent = item;
+            select.appendChild(option);
+        });
+    })
+    .catch(err => console.error(err));
+
+/* ===============================
+   BUSCAR (SOLO q)
+================================ */
+document.getElementById("searchBtn").addEventListener("click", () => {
+
+    let textInput = document.getElementById("query").value.trim();
+
+    // 🔑 Normalizar palabras con guion
+    if (textInput.includes("-")) {
+        textInput = textInput.split("-")[0];
+    }
+
+    const select = document.getElementById("labels");
+    let selected = select.value;
+
+    if (selected.includes("-")) {
+        selected = selected.split("-")[0];
+    }
+
+
+    console.log("📝 Input normalizado:", { textInput, selected });
+
+    const query = textInput || selected;
+
+    if (!query) {
+        alert("Escribe algo o selecciona una opción");
+        return;
+    }
+
+    const url = `${API}/search?q=${encodeURIComponent(query)}`;
+    console.log("🔎 Request FINAL:", url);
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => renderResults(data))
+        .catch(err => console.error(err));
+});
+
+
+/* ===============================
+   MOSTRAR RESULTADOS
+================================ */
+function renderResults(data) {
+    const container = document.getElementById("results");
+    container.innerHTML = "";
+
+    if (!data.results || data.results.length === 0) {
+        container.innerHTML = "<p>No se encontraron issues.</p>";
+        return;
+    }
+
+    const info = document.createElement("p");
+    info.innerHTML = `<strong>${data.results.length}</strong> issues encontrados`;
+    container.appendChild(info);
+
+    data.results.forEach(issue => {
+        const div = document.createElement("div");
+        div.className = "issue";
+
+        // 🔑 normalizar labels
+        let labels = issue.labels;
+        if (typeof labels === "string") {
+            labels = labels.split(";"); // PRIORITY;entry-editor
+        }
+
+        div.innerHTML = `
+            <div class="labels">
+                <strong>Labels:</strong> ${labels.join(", ")}
+            </div>
+            <p>${issue.text}</p>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+</script>
+
+</body>
+</html>

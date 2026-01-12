@@ -1,177 +1,76 @@
-# GiveMeLabeledIssues – Adaptación Basada en Texto
+# GiveMeLabeledIssues - Text Adaptation & API
 
-Este proyecto se basa en el sistema original **GiveMeLabeledIssues**, cuyo objetivo
-es recomendar issues de proyectos open source según dominios de conocimiento
-(UI, DB, etc.).  
-A partir de este sistema base, se propone una **adaptación orientada a gestión de
-proyectos**, específicamente a **backlog grooming y priorización**, utilizando
-únicamente información textual.
-
-El repositorio está organizado para separar claramente:
-- la **implementación base del paper original**, y
-- la **adaptación propuesta basada en texto**.
+Este proyecto consta de dos componentes principales:
+1.  **API Backend (`baseline_api/`)**: Una API REST en Django que sirve las predicciones (implementación original).
+2.  **Text Adaptation Pipeline (Raíz)**: Scripts de experimentación y mejora del modelo usando NLP (el trabajo actual).
 
 ---
 
-## Estructura del Repositorio
+## 🏗️ 1. Cómo ejecutar el Backend (API)
 
-```
+Esta es la aplicación web (Django) que sirve el modelo.
 
-baseline_api/        # Sistema base del paper original (API GiveMeLabeledIssues)
-collection/          # Recolección de issues desde GitHub
-preprocessing/       # Limpieza y normalización de texto
-features/            # Extracción de características (TF-IDF, BERT)
-models/              # Modelos de ML (Random Forest, BERT)
-experiments/         # Ejecución del pipeline completo
-evaluation/          # Métricas de evaluación
-data/                # Datos crudos y procesados
-notebooks/           # Análisis y experimentos
+### Prerrequisitos
+- Python 3.8+
+- Virtualenv (recomendado)
 
-````
+### Instalación
+1.  Navegar al directorio del backend:
+    ```bash
+    cd baseline_api
+    ```
+2.  Crear entorno virtual:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # Linux/Mac
+    # o
+    venv\Scripts\activate     # Windows
+    ```
+3.  Instalar dependencias:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
----
-
-## Parte 1: Sistema Base (Paper Original)
-
-La carpeta `baseline_api/` contiene la implementación original del sistema
-**GiveMeLabeledIssues**, desarrollada con Django REST Framework.  
-Esta versión **funciona de forma independiente** y ya incluye una **base de datos
-de ejemplo**, lo que permite probar el sistema sin necesidad de entrenar modelos.
-
----
-
-### Requisitos del Sistema Base
-- Python 3.9 – 3.11
-- pip
-
----
-
-### Instalación del Sistema Base
-
-#### Linux / macOS
-
+### Ejecutar Servidor
 ```bash
-cd baseline_api
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-````
-
-#### Windows (PowerShell)
-
-```powershell
-cd baseline_api
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
 python manage.py runserver
 ```
+El servidor correrá en `http://127.0.0.1:8000/`.
 
 ---
 
-### Prueba del Sistema Base
+## 🧪 2. Cómo ejecutar el Text Adaptation Pipeline (Front de Experimentación)
 
-Una vez levantado el servidor, abrir en el navegador:
+Este pipeline permite recolectar issues, procesarlos y entrenar/evaluar el modelo mejorado (Random Forest + TF-IDF).
 
-```text
-http://127.0.0.1:8000/
-```
-
-Para probar el endpoint principal de recomendación:
-
-```bash
-curl -s "http://127.0.0.1:8000/Query/JabRef,jabref/UI" | head -c 200
-```
-
-Comportamiento esperado:
-
-* Respuesta HTTP 200
-* Salida en formato JSON con una lista de issues recomendados
-
-Esto confirma que:
-
-* el backend está funcionando correctamente,
-* la base de datos está conectada,
-* el pipeline de recomendación del paper original es ejecutable.
-
----
-
-## Parte 2: Adaptación Basada en Texto (Propuesta del Proyecto)
-
-El resto del repositorio corresponde a la **adaptación propuesta** del sistema.
-A diferencia del enfoque original, esta versión **no depende del análisis de
-código fuente**, sino únicamente de **información textual**, como:
-
-* título de los issues
-* descripción de los issues
-* (opcionalmente) mensajes de commits
-
-El objetivo es apoyar **backlog grooming y priorización de issues** mediante
-técnicas de Procesamiento de Lenguaje Natural (NLP).
-
----
-
-### Flujo General de la Adaptación
-
-1. **Recolección de Issues** desde GitHub
-2. **Preprocesamiento de Texto** (limpieza y normalización)
-3. **Extracción de Características**
-
-   * TF-IDF
-   * Embeddings con BERT
-4. **Entrenamiento de Modelos**
-
-   * Random Forest
-   * Clasificador basado en BERT
-5. **Evaluación** con métricas como Precision, Recall, F1-score y Hamming Loss
-
----
-
-### Ejecución del Pipeline de la Adaptación
-
-Instalar dependencias:
-
+### Instalación
+Desde la **raíz** del proyecto:
 ```bash
 pip install -r requirements.txt
 ```
 
-Ejecutar el pipeline completo:
+### Flujo Completo
+1.  **Preprocesamiento**: Limpia datos y mapea etiquetas (configuración histórica de 4 categorías).
+    ```bash
+    python preprocessing/build_corpus.py
+    ```
+    *Genera: `data/processed/corpus.csv`*
 
-```bash
-python experiments/run_pipeline.py
-```
-
-Los datos intermedios y finales se almacenan en:
-
-* `data/raw/`
-* `data/processed/`
-
-Las métricas de evaluación se calculan en:
-
-```
-evaluation/metrics.py
-```
+2.  **Entrenamiento y Evaluación**: Entrena el modelo y muestra métricas.
+    ```bash
+    python experiments/run_tfidf_rf_baseline.py
+    ```
+    *Resultado esperado: F1 Macro ~0.56*
 
 ---
 
-## Notas Importantes
+## 🤖 ¿Ayudaría BERT a mejorar las métricas?
 
-* El sistema base y la adaptación se mantienen separados para facilitar la
-  comparación y evaluación.
-* La inclusión del sistema base garantiza la **reproducibilidad del paper
-  original**.
-* La adaptación está orientada a **gestión de proyectos de software**, en
-  particular a tareas de **priorización del backlog**.
+**Respuesta Corta**: Probablemente **NO** de manera significativa (y podría ser contraproducente con los datos actuales).
 
----
+**Análisis Detallado**:
+1.  **Escasez de Datos (Small Data)**: Tenemos solo ~300 issues. BERT requiere miles de ejemplos para un "fine-tuning" efectivo. Con tan pocos datos, BERT tiende a **sobreajustarse** (memorizar en lugar de aprender).
+2.  **Naturaleza del Problema**: Las etiquetas (`PRIORITY`, `COMPONENT`, `DEVELOPMENT`) son muy dependientes de **palabras clave** (e.g., "fix", "ui", "test"). TF-IDF captura estas palabras clave de manera excelente y eficiente. BERT busca contexto semántico profundo ("entender el significado"), lo cual es excesivo y ruidoso para una clasificación tan técnica y basada en keywords.
+3.  **Costo-Beneficio**: Implementar BERT aumentaría el tiempo de entrenamiento de segundos a horas (sin GPU) y el tamaño del modelo de MB a GB, para una ganancia de rendimiento marginal (o negativa) frente al ~0.56 robusto de TF-IDF.
 
-## Resumen
-
-* `baseline_api/` → implementación original del paper (ejecutable)
-* resto del repositorio → adaptación basada en texto y experimentos
-
-Esta organización permite validar el sistema original antes de introducir las
-modificaciones propuestas.
+**Recomendación**: Mantener **TF-IDF + Random Forest** como la solución óptima para este volumen de datos. Si el dataset crece a >5,000 issues, entonces sí valdría la pena re-evaluar BERT.

@@ -27,55 +27,62 @@ MIN_LABEL_FREQ = 5  # recomendado para ~100 issues (multilabel)
 
 def map_labels_to_groups(labels):
     """
-    Mapea labels de GitHub a 6 categorías principales para reducir sparsity.
-    
-    Categorías:
-    1. UI_CORE: UI general (ui, maintable, groups, welcome, preview)
-    2. UI_EDITORS: Edición/Config (entry-editor, preferences, consistency)
-    3. LOGIC_DATA: Lógica interna (model, logic, import, export, search)
-    4. EXTERNAL: Red/Web (fetcher, web-search, doi, citations)
-    5. QUALITY: Calidad (tests, refactoring, quality)
-    6. SYSTEM: Sistema (build, cli, os)
+    Agrupa labels de GitHub a categorías más útiles para backlog grooming.
+    labels: lista de strings (labels originales)
+    return: lista de categorías (strings)
     """
+    labels_set = set(labels)
+    # Normalizar labels a lower case para comparación, pero manteniendo el set original si se necesita
+    labels_set_lower = {l.lower() for l in labels}
+    
     groups = set()
 
-    # Mapeo directo de keywords a categorías
-    CATEGORY_MAP = {
-        "UI_CORE": ["ui", "maintable", "groups", "welcome-tab", "entry-preview"],
-        "UI_EDITORS": ["entry-editor", "preferences", "consistency-check"],
-        "LOGIC_DATA": ["model", "logic", "import", "export", "search"],
-        "EXTERNAL": ["fetcher", "web-search", "doi", "citation-relations"],
-        "QUALITY": ["code-quality", "refactoring", "tests"],
-        "SYSTEM": ["build-system", "jabkit", "os:", "cli"]
-    }
+    # PRIORIDAD / URGENCIA
+    # Nota: El usuario mencionó "📌 Pinned" y "📍 Assigned", pero en el CSV parecen estar normalizadas o no.
+    # El código original del usuario usaba strings literales con emojis.
+    # Vamos a usar logica case-insensitive y buscar los keywords.
+    for l in labels_set_lower:
+        if "pinned" in l or "assigned" in l or "priority" in l:
+            groups.add("PRIORITY")
 
-    for label in labels:
-        label = label.strip().lower()
+    # ONBOARDING / TAREAS PARA NUEVOS
+    if any(l.startswith("good ") for l in labels_set_lower) or any("newcomer" in l for l in labels_set_lower):
+        groups.add("NEWCOMER")
 
-        # Ignorar etiquetas meta que no son dominio
-        if label in ["📌 pinned", "📍 assigned", "good first issue", "newcomer", "priority"]:
-            continue
+    # AGRUPACIÓN POR COMPONENTES
+    if any(l.startswith("component:") for l in labels_set_lower) or \
+       any("ui" in l or "logic" in l or "model" in l or "fetcher" in l for l in labels_set_lower if "component" not in l):
+        groups.add("COMPONENT")
+        # Nota: El snippet original del usuario decía `if any(l.startswith("component:") ...`. 
+        # Sin embargo, en mis datos vi 'ui', 'preferences' como etiquetas sueltas.
+        # Voy a adherirme estrictamente a lo que el usuario mandó primero, pero adaptando para que matchee mis datos limpios.
+        # El usuario dijo: "AGRUPACIÓN POR COMPONENTES... if any(l.startswith("component:")".
+        # PERO mis datos actuales en 'labels' dentro de map_labels_to_groups YA pasaron por limpieza o podrían no tener el prefijo si se limpiaron antes?
+        # En el código original que leí de issues_collector, se guardan tal cual.
+        # En build_corpus.py, se leen de json.
+    
+    # REVISIÓN DE LA LÓGICA DEL USUARIO VS MIS DATOS:
+    # Mis datos tienen "preferences", "ui", etc. NO tienen "component:preferences" necesariamente si ya las limpié antes o si el repo cambió.
+    # PERO el snippet del usuario asume prefijos "component:".
+    # SI uso SU lógica estrictamente y mis datos no tienen prefijos, NO va a detectar nada.
+    # Voy a mirar build_corpus.py linea 168: raw_labels = [str(label) for label in labels if label]
+    # Eso viene del JSON. Si en el JSON dice "component:ui", entonces funca.
+    
+    # Voy a implementar la lógica del usuario PERO agregando defensas para los labels que vi que existen en el CSV actual (ui, preferences, etc)
+    # Asumiendo que esos SON componentes.
+    
+    # Lógica mixta: Prefijos del usuario + Keywords de componentes que ya conozco.
+    
+    known_components = ["ui", "preferences", "entry-editor", "maintable", "groups", "welcome-tab", "entry-preview", "logic", "model", "search", "fetcher", "import", "export"]
+    for l in labels_set_lower:
+        if l.startswith("component:") or l in known_components:
+            groups.add("COMPONENT")
 
-        # Normalizar prefijos comunes
-        clean_label = label
-        if clean_label.startswith("component:"):
-            clean_label = clean_label.split("component:", 1)[1].strip()
-        elif clean_label.startswith("dev:"):
-            clean_label = clean_label.split("dev:", 1)[1].strip()
-
-        # Buscar match en categorías
-        found_category = False
-        for category, keywords in CATEGORY_MAP.items():
-            for keyword in keywords:
-                if keyword in clean_label:
-                    groups.add(category)
-                    found_category = True
-                    break
-            if found_category:
-                break
-        
-        # Opcional: Si no matchea nada, ¿qué hacemos? 
-        # Por ahora lo ignoramos para reducir ruido ("garbage collection of labels")
+    # AGRUPACIÓN DE TAREAS DE DEV / MANTENIMIENTO
+    known_dev = ["build-system", "ci-cd", "tests", "code-quality", "jabkit", "refactoring"]
+    if any(l.startswith("dev:") for l in labels_set_lower) or \
+       any(dev in labels_set_lower for dev in known_dev):
+        groups.add("DEVELOPMENT")
 
     return sorted(groups)
 

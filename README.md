@@ -64,13 +64,20 @@ pip install -r requirements.txt
 
 ---
 
-## 🤖 ¿Ayudaría BERT a mejorar las métricas?
+## 👁️ 3. Visualizador de Corpus (`index.html`)
 
-**Respuesta Corta**: Probablemente **NO** de manera significativa (y podría ser contraproducente con los datos actuales).
+Si deseas explorar los datos procesados (`corpus.csv`) usando la interfaz `index.html`:
 
-**Análisis Detallado**:
-1.  **Escasez de Datos (Small Data)**: Tenemos solo ~300 issues. BERT requiere miles de ejemplos para un "fine-tuning" efectivo. Con tan pocos datos, BERT tiende a **sobreajustarse** (memorizar en lugar de aprender).
-2.  **Naturaleza del Problema**: Las etiquetas (`PRIORITY`, `COMPONENT`, `DEVELOPMENT`) son muy dependientes de **palabras clave** (e.g., "fix", "ui", "test"). TF-IDF captura estas palabras clave de manera excelente y eficiente. BERT busca contexto semántico profundo ("entender el significado"), lo cual es excesivo y ruidoso para una clasificación tan técnica y basada en keywords.
-3.  **Costo-Beneficio**: Implementar BERT aumentaría el tiempo de entrenamiento de segundos a horas (sin GPU) y el tamaño del modelo de MB a GB, para una ganancia de rendimiento marginal (o negativa) frente al ~0.56 robusto de TF-IDF.
+1.  **Ejecutar el servidor ligero (Flask)**:
+    ```bash
+    python baseline_api/app.py
+    ```
+    *Esto levanta un servidor en `http://127.0.0.1:5000` que lee el `corpus.csv`.*
 
-**Recomendación**: Mantener **TF-IDF + Random Forest** como la solución óptima para este volumen de datos. Si el dataset crece a >5,000 issues, entonces sí valdría la pena re-evaluar BERT.
+2.  **Abrir `index.html`**:
+    Simplemente abre el archivo `index.html` (ubicado en la raíz) con tu navegador web (doble clic). 
+    La interfaz se conectará al servidor local para mostrar filtrar issues por etiqueta o texto.
+
+---
+
+

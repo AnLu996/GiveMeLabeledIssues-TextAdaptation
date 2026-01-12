@@ -88,8 +88,8 @@ def available_queries():
         labels = [l.strip().lower() for l in label_str.split(";") if l.strip()]
         for l in labels:
             # Opcional: filtrar labels no semánticos
-            if l not in {"priority", "newcomer"}:
-                all_labels.add(l)
+            # if l not in {"priority", "newcomer"}:
+            all_labels.add(l)
 
     return jsonify(sorted(all_labels))
 

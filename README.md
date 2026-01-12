@@ -176,6 +176,5 @@ evaluation/metrics.py
 Esta organización permite validar el sistema original antes de introducir las
 modificaciones propuestas.
 
-```
 
 ```

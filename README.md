@@ -178,10 +178,4 @@ modificaciones propuestas.
 
 ```
 
----
-
-Si quieres, en el siguiente mensaje puedo:
-- ayudarte a escribir **el texto del Pull Request**,
-- revisar que el README esté alineado con el informe final,
-- o ayudarte a resumir esto en **2–3 diapositivas para exposición**.
 ```

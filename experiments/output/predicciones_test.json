@@ -1,0 +1,742 @@
+[
+  {
+    "issue_id": "13014",
+    "text": "welcome tab open example library currently the welcome tab offers new library and open existing image it misses open example library task move to keep in to enable using in jabkit too add button open example library to welcome tab on click contents of chocolate bib should be opend in a new library reason is saved in jabrefs program folder which is not user writable thus the people should be guided to save the library in another file if they want to continue working",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12551",
+    "text": "add two copy options also to context menu of preview background maintable the current context menu of a main table entry contains two copy preview options image it also offers export to clipboard image image preview area the context menu of the preview only offers copying html image task in the context menu of the preview rename copy preview to copy citation html add copy citation text add export to clipboard ensure that all three of these have the same functionality as the context menu in the main menu if not report back",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13463",
+    "text": "add http port configuration introduced a http server only enable disable can be configured add configuration option and use it at start you can look at remotelistener how this works default port is img width height alt image src",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14737",
+    "text": "output version at startup triggered by we do not know which jabref version is running should be output opt jabref bin jabref warning using incubator modules jdk incubator vector messages are not initialized before accessing key references main org jabref launcher main error could not launch jabref java lang illegalstateexception cannot instantiate view interface org jabref logic preferences clipreferences",
+    "true_labels": [],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12696",
+    "text": "check consistency window should leave out same columns the dialog filters on the type then the columns with the same content should be removed image otherwise the dialog is too large",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12763",
+    "text": "fix false positive of git submodule not modified image maybe because of image triggered by",
+    "true_labels": [
+      "DEVELOPMENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13049",
+    "text": "use and styles for oo integration is your suggestion for improvement related to a problem please describe currently jabref uses these styles in libreoffice for references section heading of bibliography section text in bibliography entries however those are not the default styles for this section in libreoffice describe the solution you d like libreoffice uses these styles for bibliography text heading of bibliography section text in bibliography entries make jabref use them additional context none",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13780",
+    "text": "automatic field editor checkbox show only set fields open a library open automatic field edtior img width height alt image src see that at field dropdown all available fileds are displayed img width height alt image src when i want to clear fields i need to know by heart which fields are set task add a new tab clar content make it simlar as existing edit content but only for clear remove clear field content at edit conent if possible also filter the list at from at copy or move content img width height alt image src",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14783",
+    "text": "embedded postgres does not work under linux arm jabref version latest development branch build please note build date below operating system gnu linux details on version and operating system ubuntu arm lts checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour download latest version or also alpha version or alpha navigate to opt jabref bin run jabref see illegal state exception about missing libraries error no postgres binaries found you need to add an appropriate maven dependency that meets the following parameters system linux architecture arm exception in thread main java lang illegalstateexception missing embedded postgres binaries alpha is broken as well this must be something with the multi project jabref build stuff or whatever cannot really narrow it down i can just rule out that it has something to do with the library itself appendix originally reported i the forum details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [],
+    "predicted_labels": [
+      "COMPONENT"
+    ]
+  },
+  {
+    "issue_id": "13243",
+    "text": "junie should output help if is active jabref cli should output help not pass this to the gui start jabref and keep it running run see expected result help output in intellij image then image image then run then you also see the output image",
+    "true_labels": [],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12663",
+    "text": "allow user to choose csl bibliography title and format this is a contextual introductory issue for people wanting to dive into jabref s libreoffice integration it is a small medium sized task with the overall difficulty of a good third or fourth issue context pre requisites refer to this blog article for an introduction to how csl styles are used with jabref s libreoffice integration issue currently we have a hardcoded default title and its paragraph format for the csl bibliography as given in we wish to provide flexibility to users such that they can set a different title for the list of references e g bibliography or some other word phrase in english or other languages as well as choose its formatting the current workaround is that the user manually modifies it themselves once all their work is over as otherwise the title will get reset every time the bibliography is refreshed due to addition deletion rearrangement of citations or manual trigger in case of jstyles this problem does not exist as they are custom styles and the user can provide their intended values when making the file task add an option in the csl styles tab of the select style window in the openoffice libreoffice panel to modify bibliography title on clicking that the user should be given options to set the text for the title and its format image the options for format should be available via a dropdown and should consist of the popular presets in paragraph style formatting options as available in libreoffice image the mechanism to apply the formatting does not need to be written as it is already present just specifying the format name is enough the default if unchanged however should still remain heading these settings should be saved as user preferences in test for completion the specified text should be rendered as the bibliography title on generating bibliography via csl styles the options should be stored across jabref sessions",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14381",
+    "text": "add close library to menu currently it is not possible to close a single library img width height alt image src word has it as follows img width height alt image src task add close functionality below save all img width height alt image src functionality already exists in case on has opened multiple tabs img width height alt image src hint check that this functionality is only enabled if any library is opened",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12894",
+    "text": "library disappeared and welcome tab is shown instead jabref version latest development branch build please note build date below operating system gnu linux details on version and operating system arch linux mate de checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour open jabref welcome tab appears create a new library button in the upper left corner create another library image three tabs are listed in the upper bar welcome untitled untitled click on the nd library first untitled the first after welcome close the nd library via cross near the name welcome tab appears instead of other untitled library if you instead delete the second untitled library which is the rd in step this issue won t appear appendix no response",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14416",
+    "text": "enable resetting of newentrypreferences see for the steps to do",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13187",
+    "text": "initial endpoint for cite as you write zotero opens a popup when called image doc curl",
+    "true_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12832",
+    "text": "include pubmed url in the url field when importing from pubmed please use the github issue tracker only for bug reports and smaller suggestions for improvements requests for completely new features questions and general feedback are now handled at thanks is your suggestion for improvement related to a problem please describe when importing references from pubmed into jabref the pubmed specific url e g is not automatically included in the entry this means users have to manually add the link to the url field to quickly access the pubmed reference this extra step is inconvenient especially when importing multiple references describe the solution you d like jabref should automatically populate the url field with the pubmed url during the import process the format of the url should be where is the pubmed id of the reference this should apply to all imports from pubmed whether using direct lookup or batch import the feature should work alongside the existing doi field if present without overwriting it example image additional context this enhancement would improve the workflow for researchers who frequently use pubmed reducing manual effort and ensuring consistency in reference management users should still be able to manually edit or override the url field if needed alternative approach if modifying the url field is not desirable an alternative solution would be to enhance the pmid field by adding a clickable open in pubmed button or link when a reference contains a pmid a small link icon or button would appear next to the field in the jabref entry editor clicking this button would open the corresponding pubmed page in the default web browser this approach avoids modifying the bibtex file but is less portable since the link wouldn t be included when exporting the entry while this alternative would still provide quick access to pubmed references the preferred approach remains populating the url field to ensure full portability across reference managers implementation hints the feature should be implemented in the functionality must be tested using unit tests to ensure reliability the pubmed url should be generated using a template e g rather than string concatenation to improve readability and maintainability",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12460",
+    "text": "name in brackets still parsed as author name jabref version latest release operating system gnu linux details on version and operating system debian gnu linux bookworm x checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour create any biblatex library add a manual entry of type electronic misc book etc enter a name surrounded with brackets image appendix no response",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12952",
+    "text": "stop comments from getting deleted is your suggestion for improvement related to a problem please describe i m writing latex in combination with the ltex language client to spot some spelling and grammar mistakes i m making along the way this client scans every file for those mistakes unless you tell it explicitly somewhere in a file to stop checking for mistakes from then on to disable it completely for a file one just simply adds latex ltex enabled false at the beginning of the file like stated here unfortunately in combination with jabref these comments always get deleted on a new save i guess this is because the parser doesn t recognise the latex comments as real entries and thus throws them out describe the solution you d like i would love jabref to recognise latex comments and stop deleting them from the file additional context none",
+    "true_labels": [],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13481",
+    "text": "development rpms are missing jabref version latest development branch build please note build date below operating system gnu linux details on version and operating system fedora checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [
+      "COMPONENT",
+      "DEVELOPMENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13318",
+    "text": "support datamodel validations as user one can run biber validate datamodel xyz bib then the log is filled with entries such as warn datamodel report entry iron oliver kopp bib missing mandatory field type a pattern for this needs to be added to org jabref logic biblog bibtexlogparser one can develop test driven to first add a test to org jabref logic biblog bibtexlogparsertest steps create a new at for error strings and expected i assume will be needed add the above test string and result adapt no need to create a new file for testing this is too much effort",
+    "true_labels": [
+      "COMPONENT",
+      "DEVELOPMENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14118",
+    "text": "add option to use pseudonymize libraries in gui logic functionality for pseudonymizing libraries already exists support for using it via cli jabkit was added in we want to make it accessible to the ui as well add it to the tools menu img width height alt image src add a new option pseudonymize library and wire it with the existing logic on clicking the option it should take input the path where the pseudonymized library output and keys are to be saved via a dialog and at the end of the process there should be a new and files in those directories additional context for better context of the inputs and outputs see the pr description of and try out the feature yourself first using jabkit and a bib file such as chocolate bib note since this is a ui change a screen recording in the description of the pr adding this functionality is mandatory for marking completion",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13746",
+    "text": "add check integrity to cli current cli commands check consistency check consistency of the library convert convert between bibliography formats fetch fetch entries from a provider generate bib from aux generate small bib from aux file generate citation keys generate citation keys for entries in a bib file pdf manage pdf metadata preferences manage jabkit preferences pseudonymize perform pseudonymization of the library search search in a library misses needs to be added maybe called see",
+    "true_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12612",
+    "text": "broken link in contributing md guidelines for setting up a local workspace leads to page not found problem description the link guidelines for setting up a local workspace in the file is broken clicking on it results in a page not found error the issue occurs because the link is outdated or incorrect steps to reproduce open the repository and navigate to the file locate the guidelines for setting up a local workspace link click on the link observe that it leads to a page not found error a fix suggestion update the broken link with the correct url if possible verify that the correct link works properly before updating a pull request pr can be submitted to update the file with the correct link",
+    "true_labels": [
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12610",
+    "text": "fix springer fetcher authentication parameters missing org jabref logic importer fetcher springerfetchertest test pagesearchreturnsuniqueresultsperpage failed org jabref logic importer fetcherclientexception url http forbidden authentication parameters missing test searchbyqueryfindsentry failed org jabref logic importer fetcherclientexception url http forbidden authentication parameters missing",
+    "true_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13849",
+    "text": "ai functions module langchain j core does not declare jabref version alpha operating system windows details on version and operating system windows checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour in preference ai select gemini provider any model supplying the appropriate api key select a paper from the library open ai summary tab or open ai chat and send a message the following error is risen java util serviceconfigurationerror dev langchain j module langchain j core does not declare version jabref alpha ae c windows amd java javafx appendix no response",
+    "true_labels": [
+      "COMPONENT",
+      "DEVELOPMENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14430",
+    "text": "offer selection of citationprovider in citations tab jabref offers to display cited and citing papers img width height alt image src thereby it used the interface there are currently two implementations only one is used in the gui the cli offers selecting one task create in package use and implement method accepting a as first paramter the method checks org jabref logic importer fetcher citation crossref crossrefcitationfetcher getname org jabref logic importer fetcher citation semanticscholar semanticscholarcitationfetcher getname and returns a new instance of the fetcher the parameters are a union of the parameters of the respective constructors add a dropdown to the citation panel the left panel dropdown has crossref and semanticscholar as values dropdown state is stored in see how other classes to that also handle the default semanticscholar location is somewhere at org jabref gui entryeditor citationrelationtab citationrelationstab getpaneandstartsearch have org jabref toolkit commands getcitedworks call using this factory minor change to at org jabref logic importer fetcher citation crossref crossrefcitationfetcher getname",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12500",
+    "text": "copy to option does not follow the preferences jabref version latest release operating system windows checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour there is a bug in the copy to option even after setting it to include cross referenced entries in the dialog box it does not include them the next time copy an entry using the copy to option when prompted choose to include the cross referenced entries and select do not ask again copy another entry again using the copy to option",
+    "true_labels": [],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12413",
+    "text": "there is no highlighting of groups when selecting input entry image jabref version latest development branch build please note build date below operating system windows details on version and operating system ubuntu checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour in the latest version of jabref there is no green highlighting of groups when selecting an entry element in a list that was previously added to this group this was a very useful feature in previous versions of the program appendix no response",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13421",
+    "text": "fix docker build our docker build fails caused by merging options include the checkout hack in the ci include the gradle plugin update as submodule wait that is released and clean up the build accordingly i propose to accept the failing builds and hope for option",
+    "true_labels": [
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12662",
+    "text": "empty library should offer two actions when starting jabref and creating an empty library there is no content in the entry table image task create button add example entry which adds the bibentry shown at create button import your existing pdfs which i ensures that the library directory exists and ii trigger lookup search for unlinked files afterwards in case there is no library directory ask the user to configure one show a notification that no directory exist and then open the library properties image image note this is not about jabref showing no library at all check if is non empty",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14654",
+    "text": "restart required dialog message is mixed chinese english after switching to zh cn jabref version other please describe below reproducible after merging namely commit d bb e dc f a c operating system gnu linux details on version and operating system ubuntu checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour steps to reproduce launch jabref open file preferences change language to zh cn and save apply observe the restart required confirmation dialog expected behavior the confirmation text is fully localized in simplified chinese including the language name e g with natural chinese wording and punctuation actual behavior the first line reads in chinese but embeds the english language name chinese simplified mixed language sentence suggesting incomplete localization notes this is introduced by or more precisely the localization was not fully implemented by appendix screenshot before img width height alt image src screenshot after img width height alt image src",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13328",
+    "text": "let consistency checker yield a return code please use the github issue tracker only for bug reports and smaller suggestions for improvements requests for completely new features questions and general feedback is now handled at thanks is your suggestion for improvement related to a problem please describe i am using the consistency checker from using the jabref action in github actions the check result is great but i would like to see a failing ci stage if the consistency check is not successful describe the solution you d like usually unix tools yield a non zero return code to symbolise an error to the best of my knowledge this also applies for github actions thus i propose to add a return code maybe optional to the consistency check to allow the ci to fail in case of an inconsistent bib file",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14513",
+    "text": "shift tab on first field of entry editor should focus last field of previous tab introduced the functionality to kbd tab kbd through all fields of the entry editor there should be the inverse functionality kbd shift kbd kbd tab kbd should focus the previous field and if there is no previous field on the current entry editor tab focus the previous tab and the last field code can get inspirations from",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14636",
+    "text": "runtime bin jabref bat not existient in x jabref version latest development branch build please note build date below operating system windows details on version and operating system windows checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour use firefox plugin plugin says that runtime bat jabref bat does not exist i think that this line here may need to be changed to jabrefexe system io path combine psscriptroot jabref exe because if i change it it works or is this also something that got messed up on my system i mean the browser extension says that it connected to jabref successfully however for some reason a paper is not send to jabref looks like that something else is also broken in my system appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [
+      "COMPONENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12921",
+    "text": "trying to rearrange the welcome tab causes an exception jabref version latest development branch build please note build date below operating system windows details on version and operating system build date checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour disable the setting to hide tab bar when single library is present create a library or create if you skipped step click and drag the welcome tab and move it beside the newly created library error occurs image appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13695",
+    "text": "tests fail when git ssh commit signing is enabled jabref version alpha operating system gnu linux details on version and operating system linux generic amd java javafx checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour configure git ssh key signing run the tests tests that rely on git client commits fail appendix details summary slrgithandlertest calculatediffonbranch summary forkjoinpool worker org eclipse jgit lib signers loadsigners error org eclipse jgit lib signerfactory module org eclipse jgit does not declare java util serviceconfigurationerror org eclipse jgit lib signerfactory module org eclipse jgit does not declare at java base java util serviceloader fail serviceloader java at java base java util serviceloader checkcaller serviceloader java at java base java util serviceloader init serviceloader java at java base java util serviceloader load serviceloader java at org eclipse jgit r org eclipse jgit lib signers loadsigners signers java at org eclipse jgit r org eclipse jgit lib signers clinit signers java at org eclipse jgit r org eclipse jgit api commitcommand sign commitcommand java at org eclipse jgit r org eclipse jgit api commitcommand call commitcommand java at org jabref jablib org jabref logic git githandler createcommitoncurrentbranch githandler java at org jabref jablib org jabref logic git githandler init githandler java at org jabref jablib org jabref logic git slrgithandler init slrgithandler java at org jabref jablib org jabref logic git slrgithandlertest setupgithandler slrgithandlertest java at java base jdk internal reflect directmethodhandleaccessor invoke directmethodhandleaccessor java at java base java lang reflect method invoke method java at org junit platform commons org junit platform commons util reflectionutils invokemethod reflectionutils java at org junit platform commons org junit platform commons support reflectionsupport invokemethod reflectionsupport java at org junit jupiter engine org junit jupiter engine execution methodinvocation proceed methodinvocation java at org junit jupiter engine org junit jupiter engine execution invocationinterceptorchain validatinginvocation proceed invocationinterceptorchain java at org junit jupiter engine org junit jupiter engine extension timeoutextension intercept timeoutextension java at org junit jupiter engine org junit jupiter engine extension timeoutextension interceptlifecyclemethod timeoutextension java at org junit jupiter engine org junit jupiter engine extension timeoutextension interceptbeforeeachmethod timeoutextension java at org junit jupiter engine org junit jupiter engine execution interceptingexecutableinvoker reflectiveinterceptorcall lambda ofvoidmethod interceptingexecutableinvoker java at org junit jupiter engine org junit jupiter engine execution interceptingexecutableinvoker lambda invoke interceptingexecutableinvoker java at org junit jupiter engine org junit jupiter engine execution invocationinterceptorchain interceptedinvocation proceed invocationinterceptorchain java at org junit jupiter engine org junit jupiter engine execution invocationinterceptorchain proceed invocationinterceptorchain java at org junit jupiter engine org junit jupiter engine execution invocationinterceptorchain chainandinvoke invocationinterceptorchain java at org junit jupiter engine org junit jupiter engine execution invocationinterceptorchain invoke invocationinterceptorchain java at org junit jupiter engine org junit jupiter engine execution interceptingexecutableinvoker invoke interceptingexecutableinvoker java at org junit jupiter engine org junit jupiter engine execution interceptingexecutableinvoker invoke interceptingexecutableinvoker java at org junit jupiter engine org junit jupiter engine descriptor classbasedtestdescriptor invokemethodinextensioncontext classbasedtestdescriptor java at org junit jupiter engine org junit jupiter engine descriptor classbasedtestdescriptor lambda synthesizebeforeeachmethodadapter classbasedtestdescriptor java at org junit jupiter engine org junit jupiter engine descriptor testmethodtestdescriptor lambda invokebeforeeachmethods testmethodtestdescriptor java at org junit jupiter engine org junit jupiter engine descriptor callbacksupport lambda invokebeforecallbacks callbacksupport java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit jupiter engine org junit jupiter engine descriptor callbacksupport invokebeforecallbacks callbacksupport java at org junit jupiter engine org junit jupiter engine descriptor testmethodtestdescriptor invokebeforeeachmethods testmethodtestdescriptor java at org junit jupiter engine org junit jupiter engine descriptor testmethodtestdescriptor execute testmethodtestdescriptor java at org junit jupiter engine org junit jupiter engine descriptor testmethodtestdescriptor execute testmethodtestdescriptor java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical node around node java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit platform engine org junit platform engine support hierarchical nodetesttask executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical nodetesttask execute nodetesttask java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice exclusivetask exec forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice exclusivetask execsync forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice executesync forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice invokeall forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical node around node java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit platform engine org junit platform engine support hierarchical nodetesttask executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical nodetesttask execute nodetesttask java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice exclusivetask exec forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice exclusivetask execsync forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice executesync forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice invokeall forkjoinpoolhierarchicaltestexecutorservice java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical node around node java at org junit platform engine org junit platform engine support hierarchical nodetesttask lambda executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical throwablecollector execute throwablecollector java at org junit platform engine org junit platform engine support hierarchical nodetesttask executerecursively nodetesttask java at org junit platform engine org junit platform engine support hierarchical nodetesttask execute nodetesttask java at org junit platform engine org junit platform engine support hierarchical forkjoinpoolhierarchicaltestexecutorservice exclusivetask exec forkjoinpoolhierarchicaltestexecutorservice java at java base java util concurrent forkjointask doexec forkjointask java at java base java util concurrent forkjoinpool workqueue toplevelexec forkjoinpool java at java base java util concurrent forkjoinpool runworker forkjoinpool java at java base java util concurrent forkjoinworkerthread run forkjoinworkerthread java forkjoinpool worker org jabref logic git githandler init error initialization failed details details summary semanticconflictdetectortest semanticconflicts summary org eclipse jgit api errors unsupportedsigningformatexception no signer for ssh signatures use another signature type for git config gpg format or do not sign at org eclipse jgit r org eclipse jgit api commitcommand sign commitcommand java at org eclipse jgit r org eclipse jgit api commitcommand call commitcommand java at org jabref jablib org jabref logic git util semanticconflictdetectortest writeandcommit semanticconflictdetectortest java at org jabref jablib org jabref logic git util semanticconflictdetectortest writeandcommit semanticconflictdetectortest java at org jabref jablib org jabref logic git util semanticconflictdetectortest semanticconflicts semanticconflictdetectortest java at java base java lang reflect method invoke method java at java base java util optional ifpresent optional java at java base java util stream foreachops foreachop ofref accept foreachops java at java base java util stream referencepipeline accept referencepipeline java at java base java util stream foreachops foreachop ofref accept foreachops java at java base java util stream foreachops foreachop ofref accept foreachops java at java base java util stream referencepipeline accept referencepipeline java at java base java util spliterators arrayspliterator foreachremaining spliterators java at java base java util stream referencepipeline head foreach referencepipeline java at java base java util stream referencepipeline flatmap accept referencepipeline java at java base java util stream referencepipeline accept referencepipeline java at java base java util stream referencepipeline accept referencepipeline java at java base java util stream referencepipeline accept referencepipeline java at java base java util spliterators arrayspliterator foreachremaining spliterators java at java base java util stream abstractpipeline copyinto abstractpipeline java at java base java util stream abstractpipeline wrapandcopyinto abstractpipeline java at java base java util stream foreachops foreachop evaluatesequential foreachops java at java base java util stream foreachops foreachop ofref evaluatesequential foreachops java at java base java util stream abstractpipeline evaluate abstractpipeline java at java base java util stream referencepipeline foreach referencepipeline java at java base java util stream referencepipeline flatmap accept referencepipeline java at java base java util arraylist arraylistspliterator foreachremaining arraylist java at java base java util stream abstractpipeline copyinto abstractpipeline java at java base java util stream abstractpipeline wrapandcopyinto abstractpipeline java at java base java util stream foreachops foreachop evaluatesequential foreachops java at java base java util stream foreachops foreachop ofref evaluatesequential foreachops java at java base java util stream abstractpipeline evaluate abstractpipeline java at java base java util stream referencepipeline foreach referencepipeline java at java base java util stream referencepipeline flatmap accept referencepipeline java at java base java util stream referencepipeline accept referencepipeline java at java base java util stream referencepipeline accept referencepipeline java at java base java util stream referencepipeline accept referencepipeline java at java base java util arraylist arraylistspliterator foreachremaining arraylist java at java base java util stream abstractpipeline copyinto abstractpipeline java at java base java util stream abstractpipeline wrapandcopyinto abstractpipeline java at java base java util stream foreachops foreachop evaluatesequential foreachops java at java base java util stream foreachops foreachop ofref evaluatesequential foreachops java at java base java util stream abstractpipeline evaluate abstractpipeline java at java base java util stream referencepipeline foreach referencepipeline java at java base java util concurrent forkjointask doexec forkjointask java at java base java util concurrent forkjoinpool workqueue toplevelexec forkjoinpool java at java base java util concurrent forkjoinpool runworker forkjoinpool java at java base java util concurrent forkjoinworkerthread run forkjoinworkerthread java details details summary ssh configuration summary user name chris denman user email address icloud com user signingkey home cdenman ssh my key pub core autocrlf input init defaultbranch main gpg format ssh commit gpgsign true tag gpgsign true gpg ssh allowedsignersfile home cdenman git allowed signers details",
+    "true_labels": [
+      "COMPONENT",
+      "DEVELOPMENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT"
+    ]
+  },
+  {
+    "issue_id": "14746",
+    "text": "fix dockerbuild the workflows to build the docker images stopped working a problem was found with the configuration of task jablib generatejournallistmv type jbangtask in plugin com github koppor jbang gradle plugin type dev jbang gradle tasks jbangtask property installdir specifies directory root jbang cache which doesn t exist refs docker buildx build progress plain t jabkit f dockerfile jabkit",
+    "true_labels": [],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14034",
+    "text": "missing io github adr e adr snapshot dependency failed to build jabref version latest release operating system windows details on version and operating system windows home checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour git clone jabref url main branch in command line run gradlew build see output gradlew build downloading welcome to gradle starting a gradle daemon subsequent builds will be faster failure build failed with an exception what went wrong could not determine the dependencies of task jabgui disttar could not resolve all dependencies for configuration jabgui runtimeclasspath could not find io github adr e adr snapshot appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [
+      "COMPONENT",
+      "DEVELOPMENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT"
+    ]
+  },
+  {
+    "issue_id": "14415",
+    "text": "enable resetting of copytopreferences see for the steps to do",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14150",
+    "text": "fix stringutil package and methods is in package it should be in logic package move to package adapt tests at least move the test class and code accordingly is a single string handling method move to adapt tests and code accordingly",
+    "true_labels": [
+      "DEVELOPMENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13984",
+    "text": "unintentional reset of search query during manipulation of found entries when you perform a search a list of found entries is displayed after deleting an entry from the list the search query is completely reset to the main window displaying the entries before the search even though the search query is still entered in the search bar therefore to display the search query you must clear the search bar again and re enter the same query this issue wasn t previously present it arose relatively recently if the list resulting from a search query is manipulated in any way the search query should not be reset and the resulting list should remain until the search query is removed or modified",
+    "true_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14130",
+    "text": "ctrl shift l should open current library directory jabref version latest release operating system windows details on version and operating system windows h checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour open two different libraries in different folder press ctrl shift l which is the shortcut key for opening terminal here the terminal is opened but the directory is not the currently opened library appendix no response",
+    "true_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12467",
+    "text": "fuzzy matching for journal abbreviations please use the github issue tracker only for bug reports and smaller suggestions for improvements requests for completely new features questions and general feedback is now handled at thanks is your suggestion for improvement related to a problem please describe often the journal abbreviation feature will do nothing because there is a slight difference in the full journal name such as capitalization use of punctuation or subtitles describe the solution you d like i want to be able to use fuzzy matching ignoring minor differences like this additional context add any other context or screenshots about the feature request here",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14358",
+    "text": "make help output consistent current output jbang jabkit jabref generate citation keys help main org jabref logic journals journalabbreviationloader loadrepository info loaded journal abbreviations from c users koppor appdata local temp jabref journal journal list mv usage jabkit generate citation keys dhp input inputfile output outputfile generate citation keys for entries in a bib file d debug enable debug output h help display this help message input inputfile input bibtex file output outputfile the output bib file p porcelain enable script friendly output task change to change to without dot at the end change to this is a nice opportunity to learn about kbd ctrl kbd kbd shift kbd kbd f kbd in intellij",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14122",
+    "text": "pseudonymization does not work correctly jabref version latest development branch build please note build date below operating system windows details on version and operating system arch endeavouros linux x checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour run output java lang nullpointerexception cannot invoke java nio file path tostring because this outputfile is null at org jabref jabkit org jabref cli pseudonymize run pseudonymize java at info picocli picocli commandline executeuserobject commandline java at info picocli picocli commandline access commandline java at info picocli picocli commandline runlast executeuserobjectoflastsubcommandwithsameparent commandline java at info picocli picocli commandline runlast handle commandline java at info picocli picocli commandline runlast handle commandline java at info picocli picocli commandline abstractparseresulthandler execute commandline java at info picocli picocli commandline runlast execute commandline java at info picocli picocli commandline execute commandline java at org jabref jabkit org jabref jabkit main jabkit java task jabkit run failed failure build failed with an exception there is also another bug whenever you actually provide the output i have fixed this in a local branch but wanted to make sure that this was in fact unintended behavior before making a pr if someone experienced in jabkit jabref tells me this is unintended i will make the pr appendix details summary bib file chocolate bib summary article corti author corti roberto and flammer andreas j and hollenberg norman k and lu scher thomas f date journaltitle circulation title cocoa and cardiovascular health doi circulationaha issn number pages volume publisher ovid technologies wolters kluwer health article cooper author cooper karen a and donovan jennifer l and waterhouse andrew l and williamson gary date journaltitle british journal of nutrition title cocoa and health a decade of research doi s issn number pages volume publisher cambridge university press cup article ding author ding eric l and hutfless susan m and ding xin and girotra saket date journaltitle nutrition metabolism title chocolate and prevention of cardiovascular disease a systematic review doi issn number volume publisher springer science and business media llc article keen author keen carl l date journaltitle journal of the american college of nutrition title chocolate food as medicine medicine as food doi issn number sup pages s s volume publisher informa uk limited article katz author katz david l and doughty kim and ali ather date journaltitle antioxidants redox signaling title cocoa and chocolate in human health and disease doi ars issn number pages volume publisher mary ann liebert inc readstatus skimmed article parker author parker gordon and parker isabella and brotchie heather date journaltitle journal of affective disorders title mood state effects of chocolate doi j jad issn number pages volume groups used publisher elsevier bv readstatus read article scholey author scholey andrew and owen lauren date journaltitle nutrition reviews title effects of chocolate on cognitive function and mood a systematic review doi nure issn number pages volume groups used publisher oxford university press oup readstatus read article tan author tan terence yew chin and lim xin yi and yeo julie hsiao hui and lee shaun wen huey and lai nai ming date journaltitle nutrients title the health effects of chocolate and cocoa a systematic review doi nu issn number pages volume publisher mdpi ag readstatus skimmed article macht author macht michael and mueller jochen date journaltitle appetite title immediate effects of chocolate on experimentally induced mood states doi j appet issn number pages volume groups used publisher elsevier bv readstatus read article tokede author tokede o a and gaziano j m and djouss l date journaltitle european journal of clinical nutrition title effects of cocoa products dark chocolate on serum lipids a meta analysis doi ejcn issn number pages volume publisher springer science and business media llc article garcia author garcia jose p and santana adrian and baruqui diego lugo and suraci nicholas date journaltitle reviews in cardiovascular medicine title the cardiovascular effects of chocolate doi j rcm issn number volume publisher imr press article hooper author hooper lee and kay colin and abdelhamid asmaa and kroon paul a and cohn jeffrey s and rimm eric b and cassidy aed n date journaltitle the american journal of clinical nutrition title effects of chocolate cocoa and flavan ols on cardiovascular health a systematic review and meta analysis of randomized trials doi ajcn issn number pages volume publisher elsevier bv readstatus skimmed article di renzo author di renzo gian carlo and brillo eleonora and romanelli maila and porcaro giuseppina and capanna federica and kanninen tomi t and gerli sandro and clerici graziano date journaltitle the journal of maternal fetal neonatal medicine title potential effects of chocolate on human pregnancy a randomized controlled trial doi issn number pages volume groups used publisher informa uk limited readstatus read article richard author richard anna and meule adrian and friese malte and blechert jens date journaltitle frontiers in psychology title effects of chocolate deprivation on implicit and explicit evaluation of chocolate in high and low trait chocolate cravers doi fpsyg issn volume groups used publisher frontiers media sa readstatus read article fulton author fulton james e jr and plewig gerd and kligman albert m date journaltitle jama the journal of the american medical association title effect of chocolate on acne vulgaris doi jama eprint issn number pages url volume publisher american medical association ama comment jabref meta databasetype biblatex comment jabref meta filedirectory pdfs comment jabref meta grouping allentriesgroup searchgroup entries without a group groups searchgroup entries without a linked file file staticgroup paywalled searchgroup to read groups and readstatus x ff keywordgroup skimmed readstatus skimmed xffff ff keywordgroup read readstatus read x ff ff staticgroup used x ffff comment jabref meta groups search syntax version alpha comment jabref meta keypatterndefault auth year details",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14348",
+    "text": "rewrite just returns an url and the assumption at is that the api key is just appended it should be changed to a logic where the url is constructed in each fetcher however the real solution is to adapt to and each fetcher could check for itself this is more work and one needs to dive into each fetcher",
+    "true_labels": [
+      "COMPONENT",
+      "DEVELOPMENT",
+      "NEWCOMER"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12695",
+    "text": "check consistency should have a progress bar open a large library do quality check integrity a progress is displayed see close the dialog do quality check consistency no dialog is displayed with progresds dialog is displayed",
+    "true_labels": [
+      "NEWCOMER"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12703",
+    "text": "replace cleanup by clean up note to contributors this is a simple task intended for people who have not taken solved a good first issue so far we have clean up of entries it is spelled as cleanup in jabref but should be clean up update occurrences in the code wherever it s visible to the user update background risen by",
+    "true_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13758",
+    "text": "check for updates is disabled in jabref macos version intel jabref version latest release operating system macos details on version and operating system macos checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12701",
+    "text": "normalizenamesformatter should treat spaces bibtex article demo author first last first last first last renders in jabref as follows image but is should check hey there are strings separated by one space and blocks separated by multple spaces one space one author block multiple spaces sepearates author block task add test to org jabref model entry authorlisttest modify org jabref logic importer authorlistparser parse add heuristics at the beginning of the method",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13205",
+    "text": "task with name schemagen org jabref logic importer fileformat citavi not found in project jablib jabref version latest development branch build please note build date below operating system gnu linux details on version and operating system no response checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour when i try building jabref from a d c e e ec b c e fa aec i get this error configure project jabgui w file build source jabgui build gradle kts getter for builddir file is deprecated deprecated in java incubating problems report is available at file build source build reports problems problems report html failure build failed with an exception where build file build source jablib build gradle kts line what went wrong task with name schemagen org jabref logic importer fileformat citavi not found in project jablib try run with stacktrace option to get the stack trace run with info or debug option to get more log output run with scan to get full insights get more help at deprecated gradle features were used in this build making it incompatible with gradle you can use warning mode all to show the individual deprecation warnings and determine if they come from your own scripts or plugins for more on this please refer to in the gradle documentation appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [
+      "DEVELOPMENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13536",
+    "text": "jabref does not start on intel macs known good commit this one is also good one needs to do some checout magic to get it working first bad commit first reported at proposal add a catch for a runtimeexception at theme switching and just log an error do not crash complete jabref",
+    "true_labels": [
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12660",
+    "text": "clean up jabref resources currently image task replace twitter by mastodon linking to add linkedin before facebook",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14132",
+    "text": "refactor long method importdatabase in ovidimporter is your suggestion for improvement related to a problem please describe the method in ovidimporter has grown into a long method that mixes multiple functionalities including record splitting per field parsing regex handling for source fields and final cleanup this makes it harder to understand test and maintain describe the solution you d like i d like to refactor by extracting several small private helper methods and while preserving all current behavior and public apis the goal is purely to improve readability and separation of concerns not to change functionality additional context this refactoring proposal was discussed and approved on the jabref gitter channel would you prefer helper methods like these to be annotated with and have direct unit tests or should testing rely solely on the existing integration level coverage for i understand there are different schools of thought on this and would like to follow jabref s convention",
+    "true_labels": [
+      "DEVELOPMENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12410",
+    "text": "memory overflow and operating system freeze due to the cited by entry tab from the citation relations scrolling jabref version latest development branch build please note build date below operating system gnu linux details on version and operating system ubuntu checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour to reproduce you can use the article with doi j nimb after adding an article to the library you need to scroll the slider from cited by to the area of articles corresponding to as in the figure below image you need to be careful because you may need to crash due to memory overload appendix",
+    "true_labels": [
+      "DEVELOPMENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "12504",
+    "text": "read status extra options please use the github issue tracker only for bug reports and smaller suggestions for improvements requests for completely new features questions and general feedback is now handled at thanks is your suggestion for improvement related to a problem please describe currently there are only options for read status read and skimmed i would like to propose additional statuses in progress or reading and queued or up next describe the solution you d like add in progress and queued as two new options for read status additional context i think both of these options are worthwhile especially for when we have hundreds thousands of bib entries case for in progress if i m in the middle of reading a paper and i want to quickly look up another paper and then i get distracted i am extremely likely to forget what paper i was just reading or if it s a long article that takes a few days and i can t read it one day after another having an in progress option would allow me to just note that this one i started but haven t yet completed reading skimming yet and so i should probably go back to this at some point case for queued as i m reading an article sometimes it cites another article and i want to read that one i can then mark that article as queued so that i know i want to read this next this allows for better navigation and doesn t require me to keep track on paper which paper i want to look at next the two options combined are also very beneficial as it allows jumping between my queue and in progress in order to not have to constantly search for things when making auto generated groups",
+    "true_labels": [
+      "COMPONENT"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13930",
+    "text": "test concrete patterns in bracketedpatterntest there is a comment in citationkeygeneratortest the concrete patterns such as code authorsalpha code should better be tested at link bracketedpatterntest i had been working on this in a pr for another issue but think it should be separate this could be a good second issue or for a university class",
+    "true_labels": [
+      "DEVELOPMENT",
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14016",
+    "text": "rewrite to be a pattern currently the assumption of is that the api key is appended it is appended at and then some fetch is done this does not work if the api key is used otherwise task replace by instead of testing for the key the fetcher itself does the test no default implementaiton all fetchers need to implement stub with a todo that it needs to be implemented remove the tests etc from implement for based on the existing idea you can move code from to here adapt to use the new interface adapt to test for api key add new accepting an api key and have the existing make use of it use as search look at the code on how to construct a lucene query",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "13076",
+    "text": "generation of entry with isbn number failure jabref version latest release operating system gnu linux details on version and operating system debian trixie linux checked with the latest development build copy version output from about dialog x i made a backup of my libraries before testing the latest development version x i have tested the latest development version and the problem persists steps to reproduce the behaviour open jabref select function new entry version create new entry latest insert isbn number in select entry type new entry window i e with or without hyphens click on generate search button result failed to import by id search will find correct publication on isbn search websites i e isbnsearch bookfinder abe gives correct informations screenshots from jabref image image screenshot from latest development build image appendix details summary log file summary paste an excerpt of your log file here details",
+    "true_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "COMPONENT",
+      "PRIORITY"
+    ]
+  },
+  {
+    "issue_id": "14594",
+    "text": "cleanup of in eprint field should be split up test java arguments of new bibentry withfield standardfield eprint arxiv new bibentry withfield standardfield eprint withfield standardfield eprinttype arxiv task add test to adapt accordingly",
+    "true_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ],
+    "predicted_labels": [
+      "NEWCOMER",
+      "PRIORITY"
+    ]
+  }
+]

@@ -14,8 +14,13 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+import json
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MultiLabelBinarizer
+
+from pathlib import Path
+OUT = Path("experiments/output")
+OUT.mkdir(parents=True, exist_ok=True)
 
 # Agregar el directorio raíz al path para imports
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -258,6 +263,32 @@ def main():
     # ============================================
     print("\n[INFO] Realizando predicciones...")
     y_pred = model.predict(X_test_tfidf)
+
+    #--------------------------------------------------------------------------------------------------------
+    # ============================================
+    # 7.1 EXPORTAR PREDICCIONES PARA EL RECOMENDADOR
+    # ============================================
+    print("\n[INFO] Exportando predicciones para el recomendador...")
+
+    out_dir = Path(BASE_DIR) / "experiments" / "output"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "predicciones_test.json"
+
+    def row_to_labels(row_bin):
+        return [label_names[j] for j in range(len(label_names)) if row_bin[j] == 1]
+
+    pred_records = []
+    for i in range(len(X_test)):
+        pred_records.append({
+            "issue_id": str(df.iloc[X_test.index[i]]["issue_id"]) if hasattr(X_test, "index") else str(i),
+            "text": str(X_test.iloc[i]) if hasattr(X_test, "iloc") else str(X_test[i]),
+            "true_labels": row_to_labels(y_test[i]),
+            "predicted_labels": row_to_labels(y_pred[i]),
+        })
+
+    out_path.write_text(json.dumps(pred_records, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[OK] Exportado: {out_path}")
+
     
     print(f"[OK] Predicciones completadas")
     print(f"[INFO] Shape de predicciones: {y_pred.shape}")
